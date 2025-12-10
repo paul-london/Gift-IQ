@@ -2,9 +2,9 @@ import "./App.css";
 
 function App() {
   return (
-    <>
-      <div className="app">Smart Gift Planner</div>
-    </>
+    <div className="page">
+      <div className="page__content">Smart Gift Planner</div>
+    </div>
   );
 }
 
