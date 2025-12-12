@@ -1,14 +1,44 @@
 .header {
   display: flex;
   align-items: center;
-  padding: 32px;
+  background-color: #d9d9d9;
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
-  gap: 20px;
+  height: 50px;
+  justify-content: space-between;
+  /* border: 1px solid #000; */
 }
 
-.header__range-span {
+.header__nav {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  border: 1px solid #000;
+  padding: 11px 0;
+  gap: 15px;
+}
+.header__btn {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.header__btn:hover {
+  cursor: pointer;
+}
+.header__btn_type_login {
+  padding: 11px 10px;
+  border: 1px solid #000;
+}
+.header__btn_type_cart {
+  text-decoration: underline;
+}
+.header__btn_type_recipient {
+  text-decoration: underline;
+}
+
+/* .header__range-span {
   font-weight: 500;
   font-size: 16px;
   line-height: 1;
@@ -32,22 +62,24 @@
   height: 24px;
   background: blue;
   border-radius: 50%;
-}
+} */
 
 .header__label {
-  width: 50%;
-  font-weight: 700;
+  width: 218px;
+  /* font-weight: 700;
   font-size: 36px;
-  line-height: 36px;
+  line-height: 36px; */
   color: #000000;
+  padding-right: 20px;
 }
 
 .header__input {
   border-bottom: 1px solid #000000;
-  border-radius: 8px;
+  border-radius: 28px;
   width: 100%;
   box-sizing: border-box;
-  padding: 6px;
+  padding: 16px;
+  height: 30px;
 }
 
 .header__input:hover {
@@ -56,7 +88,8 @@
 
 .header__input::placeholder {
   font-weight: 700;
-  font-size: 24px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 1;
   color: #00000080;
+  padding-left: 20px;
 }

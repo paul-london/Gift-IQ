@@ -40,6 +40,26 @@ function Header({
 
   return (
     <div className="header">
+      <button
+        onClick={handleViewCart}
+        className="header__btn header__btn_type_login"
+      >
+        Login Here
+      </button>
+      <div className="header__nav">
+        <button
+          onClick={handleViewCart}
+          className="header__btn header__btn_type_cart"
+        >
+          Liked Items
+        </button>
+        <button
+          onClick={handleViewCart}
+          className="header__btn header__btn_type_recipient"
+        >
+          Add Recipient
+        </button>
+      </div>
       {/* <span className="header__range-span">${lowPriceRange}</span> */}
       {/* <div className="header__slider">
         <input
@@ -69,7 +89,7 @@ function Header({
           type="text"
           className="header__input"
           id="search"
-          placeholder="Search"
+          placeholder="Answer"
           onChange={onTextChange}
         />
       </label>
@@ -80,10 +100,6 @@ function Header({
           </option>
         ))}
       </select> */}
-
-      <button onClick={handleViewCart} className="header__cart-btn">
-        {getSumQuantity() > 0 ? parseInt(getSumQuantity()) : 0} items
-      </button>
     </div>
   );
 }

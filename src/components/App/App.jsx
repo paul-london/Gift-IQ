@@ -10,13 +10,14 @@ import { catregoryOptions } from "../../utils/constants";
 import { groupOptions } from "../../utils/constants";
 
 function App() {
-  const [activeModal, setActiveModal] = useState("gift_survey");
+  const [activeModal, setActiveModal] = useState(""); //useState("gift_survey");
   const [lowPriceRange, setLowPriceRange] = useState(0);
   const [highPriceRange, setHighPriceRange] = useState(1000);
   const [seacrhText, setSeacrhText] = useState("");
   const [category, setCategory] = useState("");
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   let selectedCategory = "";
   let selectedGroup = "";
@@ -67,12 +68,9 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    console.log(nameInput);
-    console.log(selectedCategory);
-    console.log(selectedGroup);
-    console.log(priceRange);
-
+    setCategory(selectedCategory);
+    setHighPriceRange(priceRange);
+    setFormSubmitted(true);
     setActiveModal("");
   }
   function setNameInput(e) {
@@ -102,7 +100,9 @@ function App() {
           cartItems={selectedItemsToAdd}
           onViewCart={onViewCart}
         />
+
         <Main
+          showItems={formSubmitted}
           handleItemClick={handleItemClick}
           lowPriceRange={lowPriceRange}
           highPriceRange={highPriceRange}

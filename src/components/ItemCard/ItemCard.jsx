@@ -24,7 +24,7 @@ function ItemCard({ item, onItemClick, onAddItem }) {
       <div className="item__content">
         <p className="item__description">{item.description}</p>
         <p className="item__price">${item.price}</p>
-        <button type="button" class="item__like-btn"></button>
+        <button type="button" className="item__like-btn"></button>
         <label htmlFor="quantity" className="item__label">
           Quantity:
           <input
