@@ -36,6 +36,7 @@ function Main({
   return (
     <main>
       <section className="items">
+        <h2>Recommended Items</h2>
         <ul className="items__list">{filterResult}</ul>
       </section>
     </main>

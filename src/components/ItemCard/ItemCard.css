@@ -50,3 +50,7 @@
   line-height: 1.2;
   padding: 0;
 }
+
+.item__like-btn {
+  background-image: url(../../assets/images/heart.png);
+}
