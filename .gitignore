@@ -1,3 +1,8 @@
+*.csv
+*json
+*.html
+*.env
+
 # Logs
 logs
 *.log
