@@ -1,6 +1,7 @@
 import "./Header.css";
 import logo from "../../assets/images/logo.svg";
 import { catregoryOptions } from "../../utils/constants";
+
 function Header({
   handleLowPriceRange,
   handleHighPriceRange,
@@ -9,6 +10,8 @@ function Header({
   selectedCategory,
   lowPriceRange,
   highPriceRange,
+  cartItems,
+  onViewCart,
 }) {
   function onLowPriceChange(e) {
     const value = Number(e.target.value);
@@ -23,6 +26,17 @@ function Header({
   }
   function onSelectedCategory(e) {
     handleCategory(e.target.value);
+  }
+  function handleViewCart() {
+    onViewCart();
+  }
+
+  function getSumQuantity() {
+    const sum = cartItems.reduce(function (acc, curr) {
+      return acc + parseInt(curr.quantity);
+    }, 0);
+    return sum;
+    //console.log(sum);
   }
 
   return (
@@ -67,6 +81,10 @@ function Header({
           </option>
         ))}
       </select>
+
+      <button onClick={handleViewCart} className="header__cart-btn">
+        {getSumQuantity() > 0 ? parseInt(getSumQuantity()) : 0} items
+      </button>
     </div>
   );
 }

@@ -7,6 +7,7 @@ function Main({
   highPriceRange,
   seacrhTextValue,
   selectedCategory,
+  handleAddToCart,
 }) {
   let filteredItems = testItems.filter((item) => {
     return lowPriceRange <= item.price && item.price <= highPriceRange;
@@ -23,7 +24,12 @@ function Main({
   }
   const filterResult = filteredItems.map((item) => {
     return (
-      <ItemCard key={item._id} item={item} onItemClick={handleItemClick} />
+      <ItemCard
+        key={item._id}
+        item={item}
+        onItemClick={handleItemClick}
+        onAddItem={handleAddToCart}
+      />
     );
   });
 

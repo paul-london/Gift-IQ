@@ -1,4 +1,17 @@
-.item {
+.cart-items {
+  margin-top: 40px;
+}
+
+.cart-items__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 100px);
+  gap: 20px;
+  justify-content: center;
+}
+/* .item {
   width: 323px;
   height: 500px;
   position: relative;
@@ -49,4 +62,4 @@
   font-size: 20px;
   line-height: 1.2;
   padding: 0;
-}
+} */

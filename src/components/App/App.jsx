@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import "./App.css";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
 import ItemModal from "../ItemModal/ItemModal";
+import CartModal from "../CartModal/CartModal";
 import FormModal from "../FormModal/FormModal";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   const [seacrhText, setSeacrhText] = useState("");
   const [category, setCategory] = useState("");
   const [selectedItem, setSelectedItem] = useState({});
+  const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
 
   function handleItemClick(item) {
     setActiveModal("preview");
@@ -33,6 +35,23 @@ function App() {
   function handleCategory(text) {
     setCategory(text);
   }
+  function handleAddToCart(item, quantity) {
+    const id = selectedItemsToAdd.findIndex((curr) => curr._id === item._id);
+    if (id >= 0) {
+      selectedItemsToAdd[id].quantity = quantity;
+      setSelectedItemsToAdd(selectedItemsToAdd);
+    } else {
+      item = { ...item, quantity };
+      const itemsToAdd = [...selectedItemsToAdd, item];
+      setSelectedItemsToAdd(itemsToAdd);
+    }
+  }
+  function onViewCart() {
+    if (selectedItemsToAdd.length > 0) {
+      setActiveModal("view_cart");
+    }
+  }
+
   return (
     <div className="page">
       <div className="page__content">
@@ -44,6 +63,8 @@ function App() {
           selectedCategory={category}
           lowPriceRange={lowPriceRange}
           highPriceRange={highPriceRange}
+          cartItems={selectedItemsToAdd}
+          onViewCart={onViewCart}
         />
         <Main
           handleItemClick={handleItemClick}
@@ -51,11 +72,17 @@ function App() {
           highPriceRange={highPriceRange}
           seacrhTextValue={seacrhText}
           selectedCategory={category}
+          handleAddToCart={handleAddToCart}
         />
       </div>
       <ItemModal
         activeModal={activeModal}
         item={selectedItem}
+        onClose={closeActiveModal}
+      />
+      <CartModal
+        activeModal={activeModal}
+        items={selectedItemsToAdd}
         onClose={closeActiveModal}
       />
     </div>
