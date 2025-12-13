@@ -3,31 +3,41 @@ export const recipients = [
     _id: 1,
     name: "Mike",
     group: "Family",
-    products: [5, 9, 1],
+    priceRange: "300",
+    categories: ["Shoes"],
+    products: [1],
   },
   {
     _id: 2,
     name: "Sam",
     group: "Friend",
-    products: [4, 8, 11],
+    priceRange: "80",
+    categories: ["Accessories"],
+    products: [2],
   },
   {
     _id: 3,
     name: "Charlie",
     group: "Family",
-    products: [2, 3, 5],
+    priceRange: "250",
+    categories: ["Outerwear"],
+    products: [3],
   },
   {
     _id: 4,
     name: "Katie",
     group: "Friend",
-    products: [14],
+    priceRange: "70",
+    categories: ["Shirts"],
+    products: [15],
   },
   {
     _id: 5,
     name: "Lee",
     group: "Co-worker",
-    products: [15],
+    priceRange: "50",
+    categories: ["Accessories"],
+    products: [10],
   },
 ];
 
@@ -35,7 +45,7 @@ export const testItems = [
   {
     _id: 1,
     name: "Boot",
-    price: 100,
+    price: 59.99,
     description: "Winter boot",
     broad_category: "Shoes",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Boot.png?etag=0953a2ea59f1c6ebc832fabacdc9c70e",
@@ -43,7 +53,7 @@ export const testItems = [
   {
     _id: 2,
     name: "Cap",
-    price: 50,
+    price: 25.99,
     description: "Summer cap",
     broad_category: "Accessories",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
@@ -51,7 +61,7 @@ export const testItems = [
   {
     _id: 3,
     name: "Coat",
-    price: 500,
+    price: 219.99,
     description: "Winter Coat",
     broad_category: "Outerwear",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
@@ -59,7 +69,7 @@ export const testItems = [
   {
     _id: 4,
     name: "Dress",
-    price: 800,
+    price: 159.99,
     description: "Summer dress",
     broad_category: "Dresses",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Dress.png?etag=1f9cd32a311ab139cab43494883720bf",
@@ -67,7 +77,7 @@ export const testItems = [
   {
     _id: 5,
     name: "Hoodie",
-    price: 550,
+    price: 92.99,
     description: "Winter Hoodie",
     broad_category: "Shirts",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
@@ -75,7 +85,7 @@ export const testItems = [
   {
     _id: 6,
     name: "Jacket",
-    price: 750,
+    price: 199.99,
     description: "Winter Jacket",
     broad_category: "Outerwear",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
@@ -83,7 +93,7 @@ export const testItems = [
   {
     _id: 7,
     name: "Jeans",
-    price: 450,
+    price: 99.99,
     description: "Winter Jeans",
     broad_category: "Pants",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jeans.png?etag=58345e8bef1ce5f95ac882e71d309e6c",
@@ -91,7 +101,7 @@ export const testItems = [
   {
     _id: 8,
     name: "Loafers",
-    price: 200,
+    price: 15.99,
     description: "Winter Loafers",
     broad_category: "Shoes",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
@@ -99,7 +109,7 @@ export const testItems = [
   {
     _id: 9,
     name: "Sandals",
-    price: 150,
+    price: 20.99,
     description: "Summer Sandals",
     broad_category: "Shoes",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sandals.png?etag=9bea85a77c0306586d2b71a33b626d41",
@@ -107,7 +117,7 @@ export const testItems = [
   {
     _id: 10,
     name: "Scarf",
-    price: 230,
+    price: 14.99,
     description: "Winter Scarf",
     broad_category: "Accessories",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Scarf.png?etag=74efbee93810c926b5507e862c6cb76c",
@@ -115,7 +125,7 @@ export const testItems = [
   {
     _id: 11,
     name: "Shorts",
-    price: 450,
+    price: 45.99,
     description: "Summer shorts",
     broad_category: "Shorts",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Shorts.png?etag=d728c496643f610de8d8fea92dd915ba",
@@ -123,7 +133,7 @@ export const testItems = [
   {
     _id: 12,
     name: "Skirt",
-    price: 580,
+    price: 139.99,
     description: "Summer skirt",
     broad_category: "Skirts",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Skirt.png?etag=27a6bea7e1b63218820d615876fa31d1",
@@ -131,7 +141,7 @@ export const testItems = [
   {
     _id: 13,
     name: "Sneakers",
-    price: 870,
+    price: 89.99,
     description: "Winter sneakers",
     broad_category: "Shoes",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
@@ -139,7 +149,7 @@ export const testItems = [
   {
     _id: 14,
     name: "Sunglasses",
-    price: 250,
+    price: 99.99,
     description: "Summer Sunglasses",
     broad_category: "Accessories",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sunglasses.png?etag=a1bced9e331d36cb278c45df51150432",
@@ -147,7 +157,7 @@ export const testItems = [
   {
     _id: 15,
     name: "Sweatshirt",
-    price: 1000,
+    price: 53.99,
     description: "Winter sweatshirt",
     broad_category: "Shirts",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sweatshirt.png?etag=008a9674757bea2e0bdb31242e364be0",
@@ -155,7 +165,7 @@ export const testItems = [
   {
     _id: 16,
     name: "T-Shirt",
-    price: 370,
+    price: 37.99,
     description: "Summer T-shirt",
     broad_category: "Shirts",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09",

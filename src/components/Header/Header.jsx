@@ -47,7 +47,7 @@ function Header({
         Login Here
       </button>
       <div className="header__nav">
-        <button
+        {/* <button
           onClick={handleViewCart}
           className="header__btn header__btn_type_cart"
         >
@@ -58,7 +58,7 @@ function Header({
           className="header__btn header__btn_type_recipient"
         >
           Add Recipient
-        </button>
+        </button> */}
       </div>
       {/* <span className="header__range-span">${lowPriceRange}</span> */}
       {/* <div className="header__slider">
