@@ -6,13 +6,19 @@ function RecipientCard({ recipient, onRecipientClick }) {
 
   return (
     <li className="recipient">
+      <img src="" alt="" className="recipient__img" />
       <h2 className="recipient__name">{recipient.name}</h2>
-      <p className="recipient__group">{recipient.group}</p>
-      <p className="recipient__price-range">{recipient.priceRange}</p>
-      <p className="recipient__gifts-number">{recipient.products.length}</p>
-      <button onClick={handleRecipientClick} className="recipient__view-btn">
-        Recommended Gifts
-      </button>
+      <p className="recipient__gifts-number">
+        Gifts/{recipient.products.length}
+      </p>
+      <div className="recipient__content">
+        <button onClick={handleRecipientClick} className="recipient__btn">
+          Find Gifts
+        </button>
+        <button onClick={handleRecipientClick} className="recipient__btn">
+          Delete
+        </button>
+      </div>
     </li>
   );
 }
