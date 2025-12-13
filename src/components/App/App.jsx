@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 import Main from "../Main/Main";
@@ -17,8 +17,20 @@ function App() {
   const [category, setCategory] = useState("");
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedRecipient, setselectedRecipient] = useState({});
+
+  const [recipientsArray, setRecipientsArray] = useState();
+  const loaclRecipientsString = localStorage.getItem("recipients");
+  let loaclRecipients = JSON.parse(loaclRecipientsString);
+
+  useEffect(() => {
+    if (loaclRecipients === null) {
+      localStorage.setItem("recipients", JSON.stringify([]));
+      setRecipientsArray([]);
+    } else {
+      setRecipientsArray(loaclRecipients);
+    }
+  }, []);
 
   let selectedCategory = "";
   let selectedGroup = "";
@@ -72,11 +84,26 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setCategory(selectedCategory);
-    setHighPriceRange(priceRange);
-    setFormSubmitted(true);
+    // setCategory(selectedCategory);
+    // setHighPriceRange(priceRange);
+
+    const newRecipient = {
+      _id: 0 + recipientsArray?.length + 1,
+      name: nameInput,
+      group: selectedGroup,
+      priceRange: priceRange,
+      categories: selectedCategory,
+      products: [],
+    };
+    //updateRecipientsArray(newRecipient);
+
+    const loaclRecipientsArray = [...recipientsArray, newRecipient];
+    setRecipientsArray(loaclRecipientsArray);
+    localStorage.setItem("recipients", JSON.stringify(loaclRecipientsArray));
+
     setActiveModal("");
   }
+
   function setNameInput(e) {
     nameInput = e.target.value;
   }
@@ -88,7 +115,7 @@ function App() {
   }
   function setPriceRange(e) {
     priceRange = e.target.value;
-    console.log(priceRange);
+    // console.log(priceRange);
   }
   function handleAddRecipient() {
     setActiveModal("gift_survey");
@@ -109,7 +136,7 @@ function App() {
         />
 
         <Main
-          showItems={formSubmitted}
+          recipients={recipientsArray}
           handleItemClick={handleItemClick}
           lowPriceRange={lowPriceRange}
           highPriceRange={highPriceRange}
@@ -166,7 +193,7 @@ function App() {
           type="range"
           id="low-range"
           min="0"
-          max="10000"
+          max="1000"
           step="1"
           defaultValue={priceRange}
           onChange={setPriceRange}
