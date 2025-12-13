@@ -1,3 +1,36 @@
+export const recipients = [
+  {
+    _id: 1,
+    name: "Mike",
+    group: "Family",
+    products: [5, 9, 1],
+  },
+  {
+    _id: 2,
+    name: "Sam",
+    group: "Friend",
+    products: [4, 8, 11],
+  },
+  {
+    _id: 3,
+    name: "Charlie",
+    group: "Family",
+    products: [2, 3, 5],
+  },
+  {
+    _id: 4,
+    name: "Katie",
+    group: "Friend",
+    products: [14],
+  },
+  {
+    _id: 5,
+    name: "Lee",
+    group: "Co-worker",
+    products: [15],
+  },
+];
+
 export const testItems = [
   {
     _id: 1,

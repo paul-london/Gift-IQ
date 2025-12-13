@@ -1,6 +1,7 @@
 import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard";
-import { testItems } from "../../utils/constants";
+import { recipients, testItems } from "../../utils/constants";
+import RecipientCard from "../RecipientCard/RecipientCard";
 function Main({
   showItems,
   handleItemClick,
@@ -9,8 +10,11 @@ function Main({
   seacrhTextValue,
   selectedCategory,
   handleAddToCart,
+  handleRecipientClick,
+  handleAddRecipient,
 }) {
   let filterResult;
+  let recipientsResult;
   if (showItems) {
     let filteredItems = testItems.filter((item) => {
       return item.price <= highPriceRange;
@@ -59,22 +63,61 @@ function Main({
     //   );
     // });
   } else {
-    filterResult = testItems.map((item) => {
+  }
+  let coworkers = recipients
+    .filter((r) => {
+      return r.group === "Co-worker";
+    })
+    .map((recipient) => {
       return (
-        <ItemCard
-          key={item._id}
-          item={item}
-          onItemClick={handleItemClick}
-          onAddItem={handleAddToCart}
+        <RecipientCard
+          key={recipient._id}
+          recipient={recipient}
+          onRecipientClick={handleRecipientClick}
         />
       );
     });
-  }
 
+  let family = recipients
+    .filter((r) => {
+      return r.group === "Family";
+    })
+    .map((recipient) => {
+      return (
+        <RecipientCard
+          key={recipient._id}
+          recipient={recipient}
+          onRecipientClick={handleRecipientClick}
+        />
+      );
+    });
+  let friends = recipients
+    .filter((r) => {
+      return r.group === "Friend";
+    })
+    .map((recipient) => {
+      return (
+        <RecipientCard
+          key={recipient._id}
+          recipient={recipient}
+          onRecipientClick={handleRecipientClick}
+        />
+      );
+    });
   return (
     <main>
+      <section className="recipients">
+        <h2 className="recipients__title">Family</h2>
+        <ul className="recipients__list">{family}</ul>
+        <h2 className="recipients__title">Co-wrokers</h2>
+        <ul className="recipients__list">{coworkers}</ul>
+        <h2 className="recipients__title">Friends</h2>
+        <ul className="recipients__list">{friends}</ul>
+        <button onClick={handleAddRecipient} className="recipient__add-btn">
+          Add Recipient
+        </button>
+      </section>
       <section className="items">
-        <h2>Recommended Items</h2>
         <ul className="items__list">{filterResult}</ul>
       </section>
     </main>

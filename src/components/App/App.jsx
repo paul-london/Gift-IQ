@@ -10,7 +10,7 @@ import { catregoryOptions } from "../../utils/constants";
 import { groupOptions } from "../../utils/constants";
 
 function App() {
-  const [activeModal, setActiveModal] = useState(""); //useState("gift_survey");
+  const [activeModal, setActiveModal] = useState("gift_survey");
   const [lowPriceRange, setLowPriceRange] = useState(0);
   const [highPriceRange, setHighPriceRange] = useState(1000);
   const [seacrhText, setSeacrhText] = useState("");
@@ -18,12 +18,16 @@ function App() {
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [selectedRecipient, setselectedRecipient] = useState({});
 
   let selectedCategory = "";
   let selectedGroup = "";
   let nameInput = "";
   let priceRange = "5";
 
+  function handleRecipientClick(recipient) {
+    setselectedRecipient(recipient);
+  }
   function handleItemClick(item) {
     setActiveModal("preview");
     setSelectedItem(item);
@@ -86,6 +90,9 @@ function App() {
     priceRange = e.target.value;
     console.log(priceRange);
   }
+  function handleAddRecipient() {
+    setActiveModal("gift_survey");
+  }
   return (
     <div className="page">
       <div className="page__content">
@@ -109,6 +116,8 @@ function App() {
           seacrhTextValue={seacrhText}
           selectedCategory={category}
           handleAddToCart={handleAddToCart}
+          handleRecipientClick={handleRecipientClick}
+          handleAddRecipient={handleAddRecipient}
         />
       </div>
       <FormModal

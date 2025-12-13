@@ -1,0 +1,45 @@
+.recipient {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 18px;
+  border: 1px solid #0000004d;
+}
+
+.recipient__name {
+  margin: 0;
+  font-size: 36px;
+  line-height: 36px;
+  font-weight: 700;
+  color: #00000099;
+  background-color: #ffffff;
+  padding: 2px 12px;
+  border-radius: 9px;
+}
+
+.recipient__content {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 12px;
+  padding: 0 20px;
+}
+
+.recipient__group {
+  margin: 0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  padding: 0;
+}
+.recipient__view-btn {
+  cursor: pointer;
+  border-radius: 8px;
+}
