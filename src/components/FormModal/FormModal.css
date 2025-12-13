@@ -68,13 +68,15 @@
 
 .modal__input {
   display: block;
-  border: none;
+  border: solid;
   margin: 8px 0 0;
   border-bottom: 1px solid #000000;
   width: 100%;
   box-sizing: border-box;
   padding: 2px 0 4px;
   text-overflow: ellipsis;
+  border-radius: 10px;
+  background-color: #eaeaea;
 }
 
 .modal__input:hover {
@@ -97,7 +99,7 @@
   margin: 32px 0 0;
   box-sizing: border-box;
   background-color: #000000;
-  border-radius: 4px;
+  border-radius: 25px;
   border: none;
   padding: 8px 16px;
   font-weight: 700;
@@ -112,13 +114,13 @@
   padding: 0;
   margin: 32px 0 0;
   box-sizing: border-box;
-  background-color: #000000;
+  background-color: transparent;
   border-radius: 4px;
   border: none;
   padding: 8px 16px;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
-  color: #ffffff;
+  color: #000;
   cursor: pointer;
 }

@@ -18,11 +18,11 @@ function FormModal({
         ></button>
         <form className="modal__form" onSubmit={onFormSubmit}>
           {children}
-          <button type="submit" className="modal__submit-btn">
-            {buttonText}
-          </button>
           <button type="button" onclick={onClose} className="modal__Cancel-btn">
             Cancel
+          </button>
+          <button type="submit" className="modal__submit-btn">
+            {buttonText}
           </button>
         </form>
       </div>
