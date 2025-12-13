@@ -7,7 +7,6 @@ function Header({
   handleHighPriceRange,
   handleSearch,
   handleCategory,
-  selectedCategory,
   lowPriceRange,
   highPriceRange,
   cartItems,

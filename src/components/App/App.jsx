@@ -14,7 +14,6 @@ function App() {
   const [lowPriceRange, setLowPriceRange] = useState(0);
   const [highPriceRange, setHighPriceRange] = useState(1000);
   const [seacrhText, setSeacrhText] = useState("");
-  const [category, setCategory] = useState("");
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
   const [selectedRecipient, setselectedRecipient] = useState({});
@@ -32,7 +31,7 @@ function App() {
     }
   }, []);
 
-  let selectedCategory = "";
+  let slectedCategories = [];
   let selectedGroup = "";
   let nameInput = "";
   let priceRange = "5";
@@ -46,7 +45,7 @@ function App() {
   }
   function closeActiveModal() {
     if (activeModal === "gift_survey") {
-      selectedCategory = "";
+      slectedCategories = [];
       selectedGroup = "";
       nameInput = "";
       priceRange = "5";
@@ -84,7 +83,7 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // setCategory(selectedCategory);
+
     // setHighPriceRange(priceRange);
 
     const newRecipient = {
@@ -95,7 +94,6 @@ function App() {
       categories: selectedCategory,
       products: [],
     };
-    //updateRecipientsArray(newRecipient);
 
     const loaclRecipientsArray = [...recipientsArray, newRecipient];
     setRecipientsArray(loaclRecipientsArray);
@@ -110,15 +108,29 @@ function App() {
   function setSelectedGroup(e) {
     selectedGroup = e.target.value;
   }
-  function setSelectedCategory(e) {
-    selectedCategory = e.target.value;
-  }
+
   function setPriceRange(e) {
     priceRange = e.target.value;
-    // console.log(priceRange);
   }
   function handleAddRecipient() {
     setActiveModal("gift_survey");
+  }
+  function handleDeleteRecipient(recipient) {
+    const newArray = recipientsArray.filter((rec) => {
+      return rec._id !== recipient._id;
+    });
+    localStorage.setItem("recipients", JSON.stringify(newArray));
+    setRecipientsArray(newArray);
+  }
+  let isChecked;
+
+  function handleOnCheckBoxChange(e, category) {
+    debugger;
+    if (e.target.checked) {
+      slectedCategories.push(category);
+    } else {
+      console.log(slectedCategories.indexOf(category));
+    }
   }
   return (
     <div className="page">
@@ -128,7 +140,6 @@ function App() {
           handleHighPriceRange={handleHighPriceRange}
           handleSearch={handleSearch}
           handleCategory={handleCategory}
-          selectedCategory={category}
           lowPriceRange={lowPriceRange}
           highPriceRange={highPriceRange}
           cartItems={selectedItemsToAdd}
@@ -141,10 +152,10 @@ function App() {
           lowPriceRange={lowPriceRange}
           highPriceRange={highPriceRange}
           seacrhTextValue={seacrhText}
-          selectedCategory={category}
           handleAddToCart={handleAddToCart}
           handleRecipientClick={handleRecipientClick}
           handleAddRecipient={handleAddRecipient}
+          handleDeleteRecipient={handleDeleteRecipient}
         />
       </div>
       <FormModal
@@ -154,18 +165,18 @@ function App() {
         onClose={closeActiveModal}
         onFormSubmit={handleSubmit}
       >
-        <label htmlFor="name" className="modal__label">
+        <label htmlFor="name" className="form__label">
           Name{" "}
           <input
             type="text"
-            className="modal__input"
+            className="form__input"
             id="name"
             defaultValue={nameInput}
             onChange={setNameInput}
-            placeholder="Name"
+            placeholder="Recipient name..."
           />
         </label>
-        <label htmlFor="name" className="modal__label">
+        <label htmlFor="name" className="form__label">
           Group{" "}
           <select defaultValue={selectedGroup} onChange={setSelectedGroup}>
             {groupOptions.map((option) => (
@@ -175,19 +186,31 @@ function App() {
             ))}
           </select>
         </label>
-        <label htmlFor="name" className="modal__label">
-          Category{" "}
-          <select
-            defaultValue={selectedCategory}
-            onChange={setSelectedCategory}
-          >
-            {catregoryOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        <h2 className="form__title">
+          {" "}
+          What are their interests? (Choose up to 3){" "}
+        </h2>
+        <div className="form__checkbox-container">
+          {catregoryOptions.map((option) => (
+            <label
+              key={option.value}
+              className="form__label form__label_type_checkbox"
+              htmlFor="checkbox-input"
+            >
+              <input
+                className="form__input_type_checkbox"
+                id="checkbox-input"
+                type="checkbox"
+                key={option.value}
+                checked={isChecked}
+                onChange={(e) => {
+                  handleOnCheckBoxChange(e, option.value);
+                }}
+              />
+              {option.label}
+            </label>
+          ))}
+        </div>
 
         <input
           type="range"
@@ -197,7 +220,7 @@ function App() {
           step="1"
           defaultValue={priceRange}
           onChange={setPriceRange}
-          className="modal__input-range"
+          className="form__input-range"
         />
       </FormModal>
       <ItemModal

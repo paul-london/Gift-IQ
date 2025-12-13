@@ -58,7 +58,7 @@
   flex-direction: column;
 }
 
-.modal__label {
+.form__label {
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
@@ -66,33 +66,60 @@
   color: #000000;
 }
 
-.modal__input {
+.form__input {
   display: block;
-  border: solid;
-  margin: 8px 0 0;
-  border-bottom: 1px solid #000000;
+  border: 1px solid #000;
+  margin: 4px 0 0;
   width: 100%;
   box-sizing: border-box;
-  padding: 2px 0 4px;
-  text-overflow: ellipsis;
+  padding: 7px;
   border-radius: 10px;
   background-color: #eaeaea;
 }
 
-.modal__input:hover {
+.form__input:hover {
   cursor: pointer;
 }
-.modal__input:focus {
+.form__input:focus {
   outline: none;
 }
 
-.modal__input::placeholder {
+.form__input::placeholder {
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
   color: #00000080;
 }
+.form__title {
+  color: #000000;
+  margin: 0;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
 
+.form__checkbox-container {
+  margin: 10px 0 10px;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.form__label_type_checkbox {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 15px;
+  margin: 0;
+  padding: 4px;
+  color: #000000;
+}
+.form__input_type_checkbox {
+  width: 17px;
+  height: 17px;
+  margin-right: 10px;
+}
+.form__input-range {
+}
 .modal__submit-btn {
   max-width: 124px;
   padding: 0;

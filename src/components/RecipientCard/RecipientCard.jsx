@@ -1,8 +1,11 @@
 import "./RecipientCard.css";
-function RecipientCard({ recipient, onRecipientClick }) {
+function RecipientCard({ recipient, onRecipientClick, onRecipientDelete }) {
   const handleRecipientClick = () => {
     onRecipientClick(recipient);
   };
+  function handleDeleteRecipient() {
+    onRecipientDelete(recipient);
+  }
 
   return (
     <li className="recipient">
@@ -15,7 +18,7 @@ function RecipientCard({ recipient, onRecipientClick }) {
         <button onClick={handleRecipientClick} className="recipient__btn">
           Find Gifts
         </button>
-        <button onClick={handleRecipientClick} className="recipient__btn">
+        <button onClick={handleDeleteRecipient} className="recipient__btn">
           Delete
         </button>
       </div>

@@ -1,45 +1,45 @@
-export const recipients = [
-  {
-    _id: 1,
-    name: "Mike",
-    group: "Family",
-    priceRange: "300",
-    categories: ["Shoes"],
-    products: [1],
-  },
-  {
-    _id: 2,
-    name: "Sam",
-    group: "Friend",
-    priceRange: "80",
-    categories: ["Accessories"],
-    products: [2],
-  },
-  {
-    _id: 3,
-    name: "Charlie",
-    group: "Family",
-    priceRange: "250",
-    categories: ["Outerwear"],
-    products: [3],
-  },
-  {
-    _id: 4,
-    name: "Katie",
-    group: "Friend",
-    priceRange: "70",
-    categories: ["Shirts"],
-    products: [15],
-  },
-  {
-    _id: 5,
-    name: "Lee",
-    group: "Co-worker",
-    priceRange: "50",
-    categories: ["Accessories"],
-    products: [10],
-  },
-];
+// export const recipients = [
+//   {
+//     _id: 1,
+//     name: "Mike",
+//     group: "Family",
+//     priceRange: "300",
+//     categories: ["Shoes"],
+//     products: [1],
+//   },
+//   {
+//     _id: 2,
+//     name: "Sam",
+//     group: "Friend",
+//     priceRange: "80",
+//     categories: ["Accessories"],
+//     products: [2],
+//   },
+//   {
+//     _id: 3,
+//     name: "Charlie",
+//     group: "Family",
+//     priceRange: "250",
+//     categories: ["Outerwear"],
+//     products: [3],
+//   },
+//   {
+//     _id: 4,
+//     name: "Katie",
+//     group: "Friend",
+//     priceRange: "70",
+//     categories: ["Shirts"],
+//     products: [15],
+//   },
+//   {
+//     _id: 5,
+//     name: "Lee",
+//     group: "Co-worker",
+//     priceRange: "50",
+//     categories: ["Accessories"],
+//     products: [10],
+//   },
+// ];
 
 export const testItems = [
   {
@@ -175,37 +175,92 @@ export const testItems = [
 export const catregoryOptions = [
   { label: "Name", value: "Name" },
   {
-    label: "Shoes",
-    value: "Shoes",
+    label: "Travel",
+    value: "Travel",
   },
   {
-    label: "Shirts",
-    value: "Shirts",
+    label: "Clothing",
+    value: "Clothing",
   },
   {
-    label: "Accessories",
-    value: "Accessories",
+    label: "Electronics",
+    value: "Electronics",
   },
   {
-    label: "Dresses",
-    value: "Dresses",
+    label: "Home",
+    value: "Home",
   },
   {
-    label: "Shorts",
-    value: "Shorts",
+    label: "Smart Home",
+    value: "Smart Home",
   },
   {
-    label: "Outerwear",
-    value: "Outerwear",
+    label: "Home Appliances",
+    value: "Home Appliances",
   },
   {
-    label: "Pants",
-    value: "Pants",
+    label: "Home & Kitchen",
+    value: "Home & Kitchen",
+  },
+  {
+    label: "Baby",
+    value: "Baby",
+  },
+  {
+    label: "Industrial",
+    value: "Industrial",
+  },
+
+  {
+    label: "Automotive",
+    value: "Automotive",
+  },
+
+  {
+    label: "Beauty",
+    value: "Beauty",
+  },
+  {
+    label: "Arts & Crafts",
+    value: "Arts & Crafts",
+  },
+  {
+    label: "Pet Supplies",
+    value: "Pet Supplies",
+  },
+  {
+    label: "Party Supplies",
+    value: "Party Supplies",
+  },
+  {
+    label: "Health",
+    value: "Health",
+  },
+
+  {
+    label: "Smart Devices",
+    value: "Smart Devices",
+  },
+  {
+    label: "Education",
+    value: "Education",
+  },
+  {
+    label: "Sports",
+    value: "Sports",
+  },
+  {
+    label: "Sports & Outdoors",
+    value: "Sports & Outdoors",
+  },
+  {
+    label: "Gift Cards",
+    value: "Gift Cards",
   },
 ];
 
 export const groupOptions = [
-  { label: "Name", value: "Name" },
+  { label: "Relationship...", value: "empty" },
   { label: "Family", value: "Family" },
   { label: "Friends", value: "Friends" },
   { label: "Co-workers", value: "Co-workers" },

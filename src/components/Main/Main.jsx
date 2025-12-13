@@ -10,9 +10,9 @@ function Main({
   lowPriceRange,
   highPriceRange,
   seacrhTextValue,
-  selectedCategory,
   handleAddToCart,
   handleAddRecipient,
+  handleDeleteRecipient,
 }) {
   const [filterRecipientGifts, setFilterRecipientGifts] = useState([]);
   const [recipientInfo, setRecipientInfo] = useState({});
@@ -31,6 +31,7 @@ function Main({
   function handleGoBack() {
     setFilterRecipientGifts([]);
   }
+
   function handleRecipientClick(recipient) {
     setRecipientInfo(recipient);
     const filterRecipientG = testItems
@@ -77,6 +78,7 @@ function Main({
   //   );
   // });
   let coworkers, family, friends, other;
+
   if (recipients?.length > 0) {
     coworkers = recipients
       .filter((r) => {
@@ -88,6 +90,7 @@ function Main({
             key={recipient._id}
             recipient={recipient}
             onRecipientClick={handleRecipientClick}
+            onRecipientDelete={handleDeleteRecipient}
           />
         );
       });
@@ -102,6 +105,7 @@ function Main({
             key={recipient._id}
             recipient={recipient}
             onRecipientClick={handleRecipientClick}
+            onRecipientDelete={handleDeleteRecipient}
           />
         );
       });
@@ -115,6 +119,7 @@ function Main({
             key={recipient._id}
             recipient={recipient}
             onRecipientClick={handleRecipientClick}
+            onRecipientDelete={handleDeleteRecipient}
           />
         );
       });
@@ -129,6 +134,7 @@ function Main({
             key={recipient._id}
             recipient={recipient}
             onRecipientClick={handleRecipientClick}
+            onRecipientDelete={handleDeleteRecipient}
           />
         );
       });
@@ -142,32 +148,40 @@ function Main({
       >
         <h2 className="recipients__title">Family</h2>
         <p
-          className=""
-          style={{ display: family?.length === 0 ? "block" : "none" }}
+          className={`recipients__exist ${
+            (family?.length === 0 || family === undefined) &&
+            "recipient__show-empty"
+          }`}
         >
           No one to buy gifts for yet!
         </p>
         <ul className="recipients__list">{family}</ul>
         <h2 className="recipients__title">Friends</h2>
         <p
-          className=""
-          style={{ display: friends?.length === 0 ? "block" : "none" }}
+          className={`recipients__exist ${
+            (friends?.length === 0 || friends === undefined) &&
+            "recipient__show-empty"
+          }`}
         >
           No one to buy gifts for yet!
         </p>
         <ul className="recipients__list">{friends}</ul>
         <h2 className="recipients__title">Co-wrokers</h2>
         <p
-          className=""
-          style={{ display: coworkers?.length === 0 ? "block" : "none" }}
+          className={`recipients__exist ${
+            (coworkers?.length === 0 || coworkers === undefined) &&
+            "recipient__show-empty"
+          }`}
         >
           No one to buy gifts for yet!
         </p>
         <ul className="recipients__list">{coworkers}</ul>
         <h2 className="recipients__title">Other</h2>
         <p
-          className=""
-          style={{ display: other?.length === 0 ? "block" : "none" }}
+          className={`recipients__exist ${
+            (other?.length === 0 || other === undefined) &&
+            "recipient__show-empty"
+          }`}
         >
           No one to buy gifts for yet!
         </p>
@@ -181,16 +195,12 @@ function Main({
           filterRecipientGifts?.length > 0 && "recipient_opened"
         }`}
       >
-        {/* <section className="recipient-main"> */}
         <h2 className="recipient__title">{recipientInfo?.name} Gifts</h2>
         <ul className="recipient__gift-list">{filterRecipientGifts}</ul>
         <button onClick={handleGoBack} className="recipient__add-btn ">
           Back
         </button>
       </section>
-      {/* <section className="items">
-        <ul className="items__list">{filterResult}</ul>
-      </section> */}
     </main>
   );
 }
