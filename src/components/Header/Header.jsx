@@ -7,7 +7,6 @@ import avatarPlaceholder from "../../assets/images/avatarPH.jpg";
 function Header({
   handleLowPriceRange,
   handleHighPriceRange,
-  handleSearch,
   lowPriceRange,
   highPriceRange,
   cartItems,
@@ -15,6 +14,8 @@ function Header({
   openSignUpModal,
   onLogout,
   handleSearch,
+  isLoggedIn,
+  user,
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
