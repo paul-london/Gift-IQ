@@ -28,57 +28,73 @@ function Main({
     }
   }, [recipients]);
 
+  useEffect(() => {
+    if (
+      recipientInfo?.name?.length > 0 &&
+      //seacrhTextValue.length > 0 &&
+      filterRecipientGifts?.length > 0
+    ) {
+      handleRecipientClick(recipientInfo);
+    }
+  }, [seacrhTextValue]);
   function handleGoBack() {
     setFilterRecipientGifts([]);
   }
-
+  // if (seacrhTextValue)
   function handleRecipientClick(recipient) {
     setRecipientInfo(recipient);
-    const filterRecipientG = testItems
-      .filter((item) => {
+    //   const filterRecipientG = testItems
+    //     .filter((item) => {
+    //       return (
+    //         (item.price <= recipient.priceRange &&
+    //           item.broad_category.includes(recipient.categories[0])) ||
+    //         item.broad_category.includes(recipient.categories[1]) ||
+    //         item.broad_category.includes(recipient.categories[2])
+    //       );
+    //     })
+    //     .map((item) => {
+    //       return (
+    //         <ItemCard
+    //           key={item._id}
+    //           item={item}
+    //           onItemClick={handleItemClick}
+    //           onAddItem={handleAddToCart}
+    //         />
+    //       );
+    //     });
+    //   setFilterRecipientGifts(filterRecipientG);
+    // }
+
+    let filteredItems = testItems.filter((item) => {
+      return (
+        (item.price <= recipient.priceRange &&
+          item.broad_category.includes(recipient.categories[0])) ||
+        item.broad_category.includes(recipient.categories[1]) ||
+        item.broad_category.includes(recipient.categories[2])
+      );
+    });
+
+    if (seacrhTextValue.length > 0) {
+      filteredItems = filteredItems.filter((item) => {
         return (
-          (item.price <= recipient.priceRange &&
-            item.broad_category.includes(recipient.categories[0])) ||
-          item.broad_category.includes(recipient.categories[1]) ||
-          item.broad_category.includes(recipient.categories[2])
-        );
-      })
-      .map((item) => {
-        return (
-          <ItemCard
-            key={item._id}
-            item={item}
-            onItemClick={handleItemClick}
-            onAddItem={handleAddToCart}
-          />
+          item.name.toLowerCase().includes(seacrhTextValue) ||
+          item.description.toLowerCase().includes(seacrhTextValue)
         );
       });
+    }
+
+    const filterRecipientG = filteredItems.map((item) => {
+      return (
+        <ItemCard
+          key={item._id}
+          item={item}
+          onItemClick={handleItemClick}
+          onAddItem={handleAddToCart}
+        />
+      );
+    });
     setFilterRecipientGifts(filterRecipientG);
   }
-
-  // let filteredItems = testItems.filter((item) => {
-  //   return lowPriceRange <= item.price && item.price <= highPriceRange;
-  // });
-  // if (seacrhTextValue.length > 0) {
-  //   filteredItems = filteredItems.filter((item) => {
-  //     return item.name.toLowerCase().includes(seacrhTextValue);
-  //   });
-  // }
-  // if (selectedCategory !== "All") {
-  //   filteredItems = filteredItems.filter((item) => {
-  //     return item.broad_category.includes(selectedCategory);
-  //   });
-  // }
-  // filterResult = filteredItems.map((item) => {
-  //   return (
-  //     <ItemCard
-  //       key={item._id}
-  //       item={item}
-  //       onItemClick={handleItemClick}
-  //       onAddItem={handleAddToCart}
-  //     />
-  //   );
-  // });
   let coworkers, family, friends, other;
 
   if (recipients?.length > 0) {
@@ -145,7 +161,9 @@ function Main({
     <main className="main">
       <section
         className={`recipients ${
-          filterRecipientGifts?.length === 0 && "recipients_opened"
+          filterRecipientGifts?.length === 0 &&
+          seacrhTextValue.length === 0 &&
+          "recipients_opened"
         }`}
       >
         <h2 className="recipients__title">Family</h2>

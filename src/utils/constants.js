@@ -1,49 +1,8 @@
-export const baseUrl = import.meta.env.MODE === "production"
-  ? "https://smart-gift-planner-backend.onrender.com"
-  : "http://localhost:3002";
+export const baseUrl =
+  import.meta.env.MODE === "production"
+    ? "https://smart-gift-planner-backend.onrender.com"
+    : "http://localhost:3002";
 
-export const recipients = [
-  {
-    _id: 1,
-    name: "Mike",
-    group: "Family",
-    priceRange: "300",
-    categories: ["Shoes"],
-    products: [1],
-  },
-  {
-    _id: 2,
-    name: "Sam",
-    group: "Friend",
-    priceRange: "80",
-    categories: ["Accessories"],
-    products: [2],
-  },
-  {
-    _id: 3,
-    name: "Charlie",
-    group: "Family",
-    priceRange: "250",
-    categories: ["Outerwear"],
-    products: [3],
-  },
-  {
-    _id: 4,
-    name: "Katie",
-    group: "Friend",
-    priceRange: "70",
-    categories: ["Shirts"],
-    products: [15],
-  },
-  {
-    _id: 5,
-    name: "Lee",
-    group: "Co-worker",
-    priceRange: "50",
-    categories: ["Accessories"],
-    products: [10],
-  },
-];
 // export const recipients = [
 //   {
 //     _id: 1,
@@ -220,85 +179,102 @@ export const testItems = [
 
 export const catregoryOptions = [
   {
+    id: 0,
     label: "Travel",
     value: "Travel",
   },
   {
+    id: 1,
     label: "Clothing",
     value: "Clothing",
   },
   {
+    id: 2,
     label: "Electronics",
     value: "Electronics",
   },
   {
+    id: 3,
     label: "Home",
     value: "Home",
   },
   {
+    id: 4,
     label: "Smart Home",
     value: "Smart Home",
   },
   {
+    id: 5,
     label: "Home Appliances",
     value: "Home Appliances",
   },
   {
+    id: 6,
     label: "Home & Kitchen",
     value: "Home & Kitchen",
   },
   {
+    id: 7,
     label: "Baby",
     value: "Baby",
   },
   {
+    id: 8,
     label: "Industrial",
     value: "Industrial",
   },
-
   {
+    id: 9,
     label: "Automotive",
     value: "Automotive",
   },
-
   {
+    id: 10,
     label: "Beauty",
     value: "Beauty",
   },
   {
+    id: 11,
     label: "Arts & Crafts",
     value: "Arts & Crafts",
   },
   {
+    id: 12,
     label: "Pet Supplies",
     value: "Pet Supplies",
   },
   {
+    id: 13,
     label: "Party Supplies",
     value: "Party Supplies",
   },
   {
+    id: 14,
     label: "Health",
     value: "Health",
   },
-
   {
+    id: 15,
     label: "Smart Devices",
     value: "Smart Devices",
   },
   {
+    id: 16,
     label: "Education",
     value: "Education",
   },
   {
+    id: 17,
     label: "Sports",
     value: "Sports",
   },
   {
+    id: 18,
     label: "Sports & Outdoors",
     value: "Sports & Outdoors",
   },
   {
+    id: 19,
     label: "Gift Cards",
     value: "Gift Cards",
   },

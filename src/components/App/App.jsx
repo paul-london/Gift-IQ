@@ -4,7 +4,6 @@ import "./App.css";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
 import ItemModal from "../ItemModal/ItemModal";
-import CartModal from "../CartModal/CartModal";
 import FormModal from "../FormModal/FormModal";
 import LoginModal from "../LoginModal/LoginModal";
 import SignUpModal from "../SignUpModal/SignUpModal";
@@ -21,8 +20,6 @@ function App() {
   const [seacrhText, setSeacrhText] = useState("");
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [selectedRecipient, setselectedRecipient] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const token = localStorage.getItem("jwt");
@@ -30,10 +27,6 @@ function App() {
   const [shouldResetSignUpForm, setShouldResetSignUpForm] = useState(false);
   const [currentTab, setCurrentTab] = useState("home");
 
-  let selectedCategory = "";
-  let selectedGroup = "";
-  let nameInput = "";
-  let priceRange = "5";
   const OpenGiftSurveyModal = () => {
     setActiveModal("gift_survey");
   };
@@ -43,9 +36,6 @@ function App() {
   const openSignInModal = () => {
     setActiveModal("Log in");
   };
-  function handleRecipientClick(recipient) {
-    setselectedRecipient(recipient);
-  }
 
   const [formPriceRange, setFormPriceRange] = useState("50");
   const [formSlectedCategories, setFormSlectedCategories] = useState([]);
@@ -234,7 +224,6 @@ function App() {
           lowPriceRange={lowPriceRange}
           highPriceRange={highPriceRange}
           cartItems={selectedItemsToAdd}
-          onViewCart={onViewCart}
           openSignInModal={openSignInModal}
           openSignUpModal={openSignUpModal}
           isLoggedIn={isLoggedIn}
@@ -306,10 +295,10 @@ function App() {
         </h2>
         <div className="form__checkbox-container">
           {catregoryOptions.map((option) => (
-            <div className="form__checkbox-inside" key={option.value}>
+            <div className="form__checkbox-inside" key={option.id}>
               <input
                 className="form__input_type_checkbox"
-                id="checkbox-input"
+                id={option.id}
                 type="checkbox"
                 checked={isChecked}
                 onChange={(e) => {
@@ -343,11 +332,6 @@ function App() {
       <ItemModal
         activeModal={activeModal === "preview"}
         item={selectedItem}
-        onClose={closeActiveModal}
-      />
-      <CartModal
-        activeModal={activeModal === "view_cart"}
-        items={selectedItemsToAdd}
         onClose={closeActiveModal}
       />
       <LoginModal

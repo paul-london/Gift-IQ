@@ -5,8 +5,12 @@ import logo from "../../assets/images/logoFooter.png";
 import avatarPlaceholder from "../../assets/images/avatarPH.jpg";
 
 function Header({
-  isLoggedIn,
-  user,
+  handleLowPriceRange,
+  handleHighPriceRange,
+  handleSearch,
+  lowPriceRange,
+  highPriceRange,
+  cartItems,
   openSignInModal,
   openSignUpModal,
   onLogout,
