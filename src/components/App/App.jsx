@@ -85,20 +85,24 @@ function App() {
     e.preventDefault();
 
     // setHighPriceRange(priceRange);
-
+    // const categoriesSelected = slectedCategories.map(
+    //   (i) => slectedCategories[i]
+    // );
+    debugger;
+    //console.log(categoriesSelected);
     const newRecipient = {
       _id: 0 + recipientsArray?.length + 1,
       name: nameInput,
       group: selectedGroup,
       priceRange: priceRange,
-      categories: selectedCategory,
+      categories: slectedCategories,
       products: [],
     };
 
     const loaclRecipientsArray = [...recipientsArray, newRecipient];
     setRecipientsArray(loaclRecipientsArray);
     localStorage.setItem("recipients", JSON.stringify(loaclRecipientsArray));
-
+    e.target.reset();
     setActiveModal("");
   }
 
@@ -123,13 +127,20 @@ function App() {
     setRecipientsArray(newArray);
   }
   let isChecked;
-
+  let countCategories = 0;
   function handleOnCheckBoxChange(e, category) {
-    debugger;
-    if (e.target.checked) {
-      slectedCategories.push(category);
+    if (countCategories < 3) {
+      if (e.target.checked) {
+        countCategories = countCategories + 1;
+        slectedCategories.push(category);
+      } else {
+        const index = slectedCategories.indexOf(category);
+        slectedCategories.splice(index, 1);
+        countCategories = countCategories - 1;
+      }
     } else {
-      console.log(slectedCategories.indexOf(category));
+      e.target.checked = false;
+      alert("Please choose up to 3 categories.");
     }
   }
   return (
