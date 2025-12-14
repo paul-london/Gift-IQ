@@ -127,16 +127,17 @@ function App() {
     setRecipientsArray(newArray);
   }
   let isChecked;
-  let countCategories = 0;
+  const [countCategories, setCountCategories] = useState(0);
   function handleOnCheckBoxChange(e, category) {
+    debugger;
     if (countCategories < 3) {
       if (e.target.checked) {
-        countCategories = countCategories + 1;
+        setCountCategories(countCategories + 1);
         setFormSlectedCategories([...formSlectedCategories, category]);
       } else {
         const index = formSlectedCategories.indexOf(category);
         formSlectedCategories.splice(index, 1);
-        countCategories = countCategories - 1;
+        setCountCategories(countCategories - 1);
       }
     } else {
       e.target.checked = false;
@@ -175,7 +176,6 @@ function App() {
         onFormSubmit={handleSubmit}
       >
         <label htmlFor="name" className="form__label">
-          Name{" "}
           <input
             type="text"
             className="form__input"
@@ -185,8 +185,10 @@ function App() {
             placeholder="Recipient name..."
           />
         </label>
-        <label htmlFor="name" className="form__label">
+        <label htmlFor="name" className="form__label form__label_type_group">
           Group{" "}
+        </label>
+        <div className="form__select-container">
           <select
             id="group-select"
             defaultValue={formSelectedGroup}
@@ -204,30 +206,31 @@ function App() {
             ))}
           </select>
           <span className="form__span">&#9660;</span>
-        </label>
+        </div>
+
         <h2 className="form__title">
           {" "}
           What are their interests? (Choose up to 3){" "}
         </h2>
         <div className="form__checkbox-container">
           {catregoryOptions.map((option) => (
-            <label
-              key={option.value}
-              className="form__label form__label_type_checkbox"
-              htmlFor="checkbox-input"
-            >
+            <div className="form__checkbox-inside" key={option.value}>
               <input
                 className="form__input_type_checkbox"
                 id="checkbox-input"
                 type="checkbox"
-                key={option.value}
                 checked={isChecked}
                 onChange={(e) => {
                   handleOnCheckBoxChange(e, option.value);
                 }}
               />
-              {option.label}
-            </label>
+              <label
+                className="form__label form__label_type_checkbox"
+                htmlFor="checkbox-input"
+              >
+                {option.label}
+              </label>
+            </div>
           ))}
         </div>
         <label htmlFor="name" className="form__label form__label_type_range">
@@ -241,7 +244,7 @@ function App() {
             onChange={setPriceRange}
             className="form__input-range"
           />
-          ${formPriceRange}
+          <span className="form__span-range"> ${formPriceRange}</span>
         </label>
       </FormModal>
       <ItemModal
