@@ -9,7 +9,6 @@ function Header({
   lowPriceRange,
   highPriceRange,
   cartItems,
-  onViewCart,
   openSignInModal,
   openSignUpModal,
 }) {
