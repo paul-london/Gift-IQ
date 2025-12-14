@@ -1,47 +1,45 @@
 import FormModal from "../FormModal/FormModal";
-import "./LoginModal.css";
-import { useForm } from "../../hooks/useForm.js";
-import { useEffect } from "react";
+import { useForm } from "../../hooks/useForm";
+import "./SignUpModal.css";
 
-export default function LoginModal({
+export default function SignUpModal({
   isOpen,
   onClose,
-  onSignUpModal,
-  onSignIn,
-  shouldResetLoginForm,
-  onResetComplete,
+  onSignInModal,
+  onSignUp,
 }) {
   const { values, handleChange, resetForm } = useForm({
+    name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const formData = {
-      email: values.email,
-      password: values.password,
-    };
-
-    onSignIn(formData);
+    onSignUp(values);
   };
-
-  useEffect(() => {
-    if (shouldResetLoginForm) {
-      resetForm();
-      onResetComplete();
-    }
-  }, [shouldResetLoginForm, resetForm, onResetComplete]);
 
   return (
     <FormModal
-      title="Log In"
+      title="sign up"
       activeModal={isOpen}
       onClose={onClose}
       onFormSubmit={handleSubmit}
-      hideDefaultButtons = {true}
+      hideDefaultButtons={true}
     >
+      <label className="modal__label">
+        Name
+        <input
+          name="name"
+          type="text"
+          className="modal__input"
+          value={values.name}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
       <label className="modal__label">
         Email
         <input
@@ -49,10 +47,8 @@ export default function LoginModal({
           type="email"
           className="modal__input"
           value={values.email}
-          placeholder="Email"
-          id="login-email"
-          required
           onChange={handleChange}
+          required
         />
       </label>
 
@@ -62,30 +58,38 @@ export default function LoginModal({
           name="password"
           type="password"
           className="modal__input"
-          id="login-password"
           value={values.password}
           onChange={handleChange}
-          placeholder="Password"
+          required
+        />
+      </label>
+
+      <label className="modal__label">
+        Confirm Password
+        <input
+          name="confirmPassword"
+          type="password"
+          className="modal__input"
+          value={values.confirmPassword}
+          onChange={handleChange}
           required
         />
       </label>
 
       <div className="modal__signin__auth-buttons">
-        {/* ONLY this button submits the form */}
         <button type="submit" className="modal__signin-button">
-          Log in
+          Sign Up
         </button>
 
-        {/* Switch modals */}
         <button
           type="button"
           className="modal__signup-button"
           onClick={() => {
-            onSignUpModal();
+            onSignInModal();
             onClose();
           }}
         >
-          Or Sign up
+          Or Log in
         </button>
       </div>
     </FormModal>

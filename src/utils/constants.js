@@ -1,3 +1,7 @@
+export const baseUrl = import.meta.env.MODE === "production"
+  ? "https://smart-gift-planner-backend.onrender.com"
+  : "http://localhost:3002";
+
 export const recipients = [
   {
     _id: 1,

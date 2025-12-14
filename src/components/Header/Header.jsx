@@ -12,6 +12,8 @@ function Header({
   highPriceRange,
   cartItems,
   onViewCart,
+  openSignInModal,
+  openSignUpModal,
 }) {
   function onLowPriceChange(e) {
     const value = Number(e.target.value);
@@ -41,10 +43,16 @@ function Header({
   return (
     <div className="header">
       <button
-        onClick={handleViewCart}
+        onClick={openSignInModal}
         className="header__btn header__btn_type_login"
       >
         Login Here
+      </button>
+      <button
+        onClick={openSignUpModal}
+        className="header__btn header__btn_type_SignUp"
+      >
+        Sign Up
       </button>
       <div className="header__nav">
         {/* <button
