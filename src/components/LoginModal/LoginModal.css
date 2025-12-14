@@ -1,0 +1,130 @@
+/* ================================
+   LOGIN MODAL – NEUTRAL STYLES
+   ================================ */
+
+:root {
+  --color-bg: #ffffff;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+  --color-border: #d1d5db;
+
+  --color-primary: #2563eb;       /* standard blue */
+  --color-primary-hover: #1d4ed8;
+
+  --radius: 10px;
+}
+
+/* ================================
+   LABELS
+   ================================ */
+
+.modal__label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* ================================
+   INPUTS
+   ================================ */
+
+.modal__input {
+  height: 44px;
+  padding: 0 12px;
+
+  font-size: 0.95rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal__input::placeholder {
+  color: var(--color-muted);
+}
+
+.modal__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+}
+
+/* ================================
+   BUTTON GROUP
+   ================================ */
+
+.modal__signin__auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* ================================
+   PRIMARY BUTTON
+   ================================ */
+
+.modal__signin-button {
+  height: 46px;
+  border-radius: var(--radius);
+  border: none;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--color-primary);
+
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.modal__signin-button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.modal__signin-button:active {
+  transform: scale(0.98);
+}
+
+/* ================================
+   SECONDARY BUTTON (SIGN UP)
+   ================================ */
+
+.modal__signup-button {
+  background: none;
+  border: none;
+  padding: 0;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  cursor: pointer;
+
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.modal__signup-button:hover {
+  color: var(--color-primary-hover);
+}
+
+/* ================================
+   MOBILE
+   ================================ */
+
+@media (max-width: 480px) {
+  .modal__input {
+    height: 42px;
+  }
+
+  .modal__signin-button {
+    height: 44px;
+  }
+}

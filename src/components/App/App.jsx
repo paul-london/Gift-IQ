@@ -6,16 +6,42 @@ import Header from "../Header/Header";
 import ItemModal from "../ItemModal/ItemModal";
 import CartModal from "../CartModal/CartModal";
 import FormModal from "../FormModal/FormModal";
+import LoginModal from "../LoginModal/LoginModal";
+import SignUpModal from "../SignUpModal/SignUpModal";
 import { catregoryOptions } from "../../utils/constants";
 import { groupOptions } from "../../utils/constants";
+import { signup, signin, getCurrentUser } from "../../utils/auth";
+import Footer from "../Footer/Footer";
 
 function App() {
-  const [activeModal, setActiveModal] = useState("gift_survey");
+  const [activeModal, setActiveModal] = useState(null);
   const [lowPriceRange, setLowPriceRange] = useState(0);
   const [highPriceRange, setHighPriceRange] = useState(1000);
   const [seacrhText, setSeacrhText] = useState("");
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [selectedRecipient, setselectedRecipient] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const token = localStorage.getItem("jwt");
+
+  let selectedCategory = "";
+  let selectedGroup = "";
+  let nameInput = "";
+  let priceRange = "5";
+  const OpenGiftSurveyModal = () => {
+    setActiveModal("gift_survey");
+  };
+  const openSignUpModal = () => {
+    setActiveModal("sign up");
+  };
+  const openSignInModal = () => {
+    setActiveModal("Log in");
+  };
+  function handleRecipientClick(recipient) {
+    setselectedRecipient(recipient);
+  }
 
   const [formPriceRange, setFormPriceRange] = useState("50");
   const [formSlectedCategories, setFormSlectedCategories] = useState([]);
@@ -110,6 +136,69 @@ function App() {
   function handleAddRecipient() {
     setActiveModal("gift_survey");
   }
+  const handleSignUp = ({ name, email, password, confirmPassword }) => {
+    signup({ name, email, password, confirmPassword })
+      .then(() => {
+        setActiveModal("sign in");
+        return signin({ email, password }).then((data) => {
+          localStorage.setItem("jwt", data.token);
+          setIsLoggedIn(true);
+          setUser(data.user);
+          setActiveModal("");
+        });
+      })
+      .catch((err) => {
+        console.error("Registration error", err);
+      });
+  };
+  const handleSignIn = ({ email, password }) => {
+    signin({ email, password })
+      .then((data) => {
+        localStorage.setItem("jwt", data.token);
+        setIsLoggedIn(true);
+        return getCurrentUser(data.token);
+      })
+      .then((userData) => {
+        setUser(userData);
+        setIsLoggedIn(true);
+        setActiveModal("");
+      })
+      .catch((error) => {
+        console.error("Login error", error.message);
+      });
+  };
+  const switchToSignUp = () => {
+    setTimeout(() => {
+      setActiveModal("sign up");
+    });
+  };
+  const switchToSignIn = () => {
+    setTimeout(() => setActiveModal("Log in"));
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setUser(null);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+
+    if (!token) return;
+
+    getCurrentUser(token)
+      .then((userData) => {
+        setUser(userData);
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        console.error("Token check failed", err);
+        localStorage.removeItem("jwt");
+        setIsLoggedIn(false);
+        setUser(null);
+      });
+  }, []);
+
   function handleDeleteRecipient(recipient) {
     const newArray = recipientsArray.filter((rec) => {
       return rec._id !== recipient._id;
@@ -143,6 +232,8 @@ function App() {
           highPriceRange={highPriceRange}
           cartItems={selectedItemsToAdd}
           onViewCart={onViewCart}
+          openSignInModal={openSignInModal}
+          openSignUpModal={openSignUpModal}
         />
 
         <Main
@@ -159,7 +250,7 @@ function App() {
       <FormModal
         title="Who will you buy a gift for?"
         buttonText="Save"
-        activeModal={activeModal}
+        activeModal={activeModal === "gift_survey"}
         onClose={closeActiveModal}
         onFormSubmit={handleSubmit}
       >
@@ -236,15 +327,28 @@ function App() {
         </label>
       </FormModal>
       <ItemModal
-        activeModal={activeModal}
+        activeModal={activeModal === "preview"}
         item={selectedItem}
         onClose={closeActiveModal}
       />
       <CartModal
-        activeModal={activeModal}
+        activeModal={activeModal === "view_cart"}
         items={selectedItemsToAdd}
         onClose={closeActiveModal}
       />
+      <LoginModal
+        isOpen={activeModal === "Log in"}
+        onClose={closeActiveModal}
+        onSignIn={handleSignIn}
+        onSignUpModal={switchToSignUp}
+      />
+      <SignUpModal
+        isOpen={activeModal === "sign up"}
+        onClose={closeActiveModal}
+        onSignInModal={switchToSignIn}
+        onSignUp={handleSignUp}
+      />
+      <Footer/>
     </div>
   );
 }
