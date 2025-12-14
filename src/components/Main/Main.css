@@ -1,5 +1,6 @@
 .recipients {
   margin-top: 20px;
+  min-height: 750px;
   position: relative;
   display: none;
 }
@@ -12,13 +13,20 @@
   margin: 0 0 20px;
   padding: 5px;
 }
+
+.recipients__exist {
+  display: none;
+}
+.recipient__show-empty {
+  display: block;
+}
 .recipients__list {
   list-style-type: none;
   padding: 0;
   margin: 0 0 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);
-  gap: 10px;
+  gap: 35px;
   justify-content: center;
 }
 .recipient__add-btn {

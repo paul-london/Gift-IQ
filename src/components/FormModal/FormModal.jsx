@@ -51,6 +51,18 @@ function FormModal({
               </button>
             </>
           )}
+          <div className="form__btns">
+            <button
+              type="button"
+              onClick={onClose}
+              className="form__Cancel-btn"
+            >
+              Cancel
+            </button>
+            <button type="submit" className="form__submit-btn">
+              {buttonText}
+            </button>
+          </div>
         </form>
       </div>
     </div>

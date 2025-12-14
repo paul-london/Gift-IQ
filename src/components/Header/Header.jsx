@@ -6,8 +6,6 @@ function Header({
   handleLowPriceRange,
   handleHighPriceRange,
   handleSearch,
-  handleCategory,
-  selectedCategory,
   lowPriceRange,
   highPriceRange,
   cartItems,
@@ -26,9 +24,7 @@ function Header({
   function onTextChange(e) {
     handleSearch(e.target.value);
   }
-  function onSelectedCategory(e) {
-    handleCategory(e.target.value);
-  }
+
   function handleViewCart() {
     onViewCart();
   }
@@ -101,13 +97,6 @@ function Header({
           onChange={onTextChange}
         />
       </label>
-      {/* <select value={selectedCategory} onChange={onSelectedCategory}>
-        {catregoryOptions.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select> */}
     </div>
   );
 }
