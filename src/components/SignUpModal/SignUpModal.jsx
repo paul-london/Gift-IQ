@@ -1,12 +1,15 @@
 import FormModal from "../FormModal/FormModal";
 import { useForm } from "../../hooks/useForm";
 import "./SignUpModal.css";
+import { useEffect } from "react";
 
 export default function SignUpModal({
   isOpen,
   onClose,
   onSignInModal,
   onSignUp,
+  shouldResetSignUpForm,
+  onResetComplete,
 }) {
   const { values, handleChange, resetForm } = useForm({
     name: "",
@@ -19,7 +22,12 @@ export default function SignUpModal({
     e.preventDefault();
     onSignUp(values);
   };
-
+    useEffect(() => {
+    if (shouldResetSignUpForm) {
+      resetForm();
+      onResetComplete();
+    }
+  }, [shouldResetSignUpForm, resetForm, onResetComplete]);
   return (
     <FormModal
       title="sign up"

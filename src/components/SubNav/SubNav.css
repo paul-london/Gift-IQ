@@ -1,0 +1,27 @@
+.subnav {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+  background: white;
+}
+
+.subnav__btn {
+  padding: 6px 18px;
+  border-radius: 20px;
+  border: 1px solid #c9cfd6;
+  background: #f2f5f7;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.subnav__btn.active {
+  background: #d9e1f2;
+  font-weight: 600;
+}
+
+.subnav__btn:hover {
+  transform: scale(1.05);
+}

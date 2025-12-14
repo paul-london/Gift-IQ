@@ -1,6 +1,8 @@
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
-import logo from "../../assets/images/logo.svg";
-import { catregoryOptions } from "../../utils/constants";
+import logo from "../../assets/images/logoFooter.png";
+import avatarPlaceholder from "../../assets/images/avatarPH.jpg";
 
 function Header({
   handleLowPriceRange,
@@ -11,92 +13,90 @@ function Header({
   cartItems,
   openSignInModal,
   openSignUpModal,
+  onLogout,
+  handleSearch,
 }) {
-  function onLowPriceChange(e) {
-    const value = Number(e.target.value);
-    if (value <= highPriceRange - 100) handleLowPriceRange(value);
-  }
-  function onHighPriceChange(e) {
-    const value = Number(e.target.value);
-    if (value >= lowPriceRange + 100) handleHighPriceRange(value);
-  }
-  function onTextChange(e) {
-    handleSearch(e.target.value);
-  }
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  function handleViewCart() {
-    onViewCart();
-  }
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
 
-  function getSumQuantity() {
-    const sum = cartItems.reduce(function (acc, curr) {
-      return acc + parseInt(curr.quantity);
-    }, 0);
-    return sum;
-  }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <div className="header">
-      <button
-        onClick={openSignInModal}
-        className="header__btn header__btn_type_login"
-      >
-        Login Here
-      </button>
-      <button
-        onClick={openSignUpModal}
-        className="header__btn header__btn_type_SignUp"
-      >
-        Sign Up
-      </button>
-      <div className="header__nav">
-        {/* <button
-          onClick={handleViewCart}
-          className="header__btn header__btn_type_cart"
-        >
-          Liked Items
-        </button>
-        <button
-          onClick={handleViewCart}
-          className="header__btn header__btn_type_recipient"
-        >
-          Add Recipient
-        </button> */}
+    <header className="header">
+      {/* LEFT — LOGO */}
+      <div className="header__left">
+        <Link to="/" className="header__logo-link" aria-label="Go to Home">
+          <img
+            src={logo}
+            alt="Smart Gift Planner logo"
+            className="header__logo"
+          />
+        </Link>
       </div>
-      {/* <span className="header__range-span">${lowPriceRange}</span> */}
-      {/* <div className="header__slider">
-        <input
-          type="range"
-          id="low-range"
-          min="0"
-          max={highPriceRange}
-          step="10"
-          defaultValue={lowPriceRange}
-          onChange={onLowPriceChange}
-          className="header__input-range header__input-range_type_min"
-        />
-        <input
-          type="range"
-          id="high-range"
-          min={lowPriceRange}
-          max="1000"
-          step="10"
-          defaultValue={highPriceRange}
-          onChange={onHighPriceChange}
-          className="header__input-range header__input-range_type_max"
-        />
-      </div> */}
-      {/* <span className="header__range-span">${highPriceRange}</span> */}
-      <label htmlFor="search" className="header__label">
+
+      {/* CENTER — SEARCH */}
+      <div className="header__center">
         <input
           type="text"
-          className="header__input"
-          id="search"
-          placeholder="Answer"
-          onChange={onTextChange}
+          placeholder="Search gifts"
+          className="header__search"
+          onChange={(e) => handleSearch(e.target.value)}
         />
-      </label>
-    </div>
+      </div>
+
+      {/* RIGHT — AUTH / PROFILE */}
+      <div className="header__right">
+        {!isLoggedIn ? (
+          <>
+            <button
+              onClick={openSignInModal}
+              className="header__btn header__btn--login"
+            >
+              Log in
+            </button>
+            <button
+              onClick={openSignUpModal}
+              className="header__btn header__btn--signup"
+            >
+              Sign up
+            </button>
+          </>
+        ) : (
+          <div className="header__profile" ref={dropdownRef}>
+            <button
+              className="header__avatar-btn"
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
+            >
+              <img
+                src={avatarPlaceholder}
+                alt="User avatar"
+                className="header__avatar-img"
+              />
+            </button>
+
+            {isDropdownOpen && (
+              <div className="header__dropdown">
+                <span className="header__dropdown-name">{user?.name}</span>
+                <p className="header__dropdown-email">{user?.email}</p>
+                <button className="header__dropdown-logout" onClick={onLogout}>
+                  Log out
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </header>
   );
 }
 

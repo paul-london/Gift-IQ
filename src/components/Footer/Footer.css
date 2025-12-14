@@ -1,37 +1,57 @@
+/* =====================
+   FOOTER BASE
+===================== */
+
 .footer {
-  background-color: #0f2a2a; /* dark teal */
-  padding: 48px 80px;
+  background-color: #0f2a2a;
   color: #ffffff;
+  padding: 48px clamp(24px, 6vw, 80px);
 }
+
+/* =====================
+   MAIN LAYOUT
+===================== */
 
 .footer__content {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 48px;
-  max-width: 1280px;
   margin: 0 auto;
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
 }
 
-/* Logo */
+/* =====================
+   LOGO
+===================== */
+
 .footer__logo img {
   width: 120px;
   height: auto;
 }
 
-/* Mission text */
+/* =====================
+   CENTER TEXT
+===================== */
+
 .footer__text {
   max-width: 520px;
+  margin: 0 auto; /* ← centers it */
+  text-align: center; /* ← Figma-style */
   font-size: 14px;
   line-height: 1.6;
   color: #e6f2f2;
 }
 
-/* Navigation */
+/* =====================
+   NAV LINKS
+===================== */
+
 .footer__nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  text-align: right;
 }
 
 .footer__nav a {
@@ -45,18 +65,30 @@
   text-decoration: underline;
 }
 
-/* Responsive */
+/* =====================
+   COPYRIGHT
+===================== */
+
+.footer__copyright {
+  max-width: 1280px;
+  margin: 32px auto 0;
+  font-size: 13px;
+  color: #c7dcdc;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+
 @media (max-width: 900px) {
   .footer__content {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     text-align: center;
+    gap: 24px;
   }
 
   .footer__nav {
     align-items: center;
-  }
-
-  .footer__text {
-    margin: 0 auto;
+    text-align: center;
   }
 }

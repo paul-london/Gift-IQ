@@ -11,23 +11,26 @@ function FormModal({
   hideDefaultButtons = false,
 }) {
   useEffect(() => {
-  const handleEsc = (e) => {
-    if (e.key === "Escape") {
-      onClose();
+    const handleEsc = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (activeModal) {
+      document.addEventListener("keydown", handleEsc);
     }
-  };
 
-  if (activeModal) {
-    document.addEventListener("keydown", handleEsc);
-  }
-
-  return () => {
-    document.removeEventListener("keydown", handleEsc);
-  };
-}, [activeModal, onClose]);
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [activeModal, onClose]);
 
   return (
-    <div className={`modal ${activeModal ? "modal_opened" : ""}`} onClick={onClose}>
+    <div
+      className={`modal ${activeModal ? "modal_opened" : ""}`}
+      onClick={onClose}
+    >
       <div className="modal__container" onClick={(e) => e.stopPropagation()}>
         <h2 className="modal__title">{title}</h2>
         <button
@@ -38,31 +41,19 @@ function FormModal({
         <form className="modal__form" onSubmit={onFormSubmit}>
           {children}
           {!hideDefaultButtons && (
-            <>
-              <button type="submit" className="modal__submit-btn">
-                {buttonText}
-              </button>
+            <div className="form__btns">
               <button
                 type="button"
                 onClick={onClose}
-                className="modal__Cancel-btn"
+                className="form__Cancel-btn"
               >
                 Cancel
               </button>
-            </>
+              <button type="submit" className="form__submit-btn">
+                {buttonText}
+              </button>
+            </div>
           )}
-          <div className="form__btns">
-            <button
-              type="button"
-              onClick={onClose}
-              className="form__Cancel-btn"
-            >
-              Cancel
-            </button>
-            <button type="submit" className="form__submit-btn">
-              {buttonText}
-            </button>
-          </div>
         </form>
       </div>
     </div>
