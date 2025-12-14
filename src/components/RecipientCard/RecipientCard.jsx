@@ -9,7 +9,7 @@ function RecipientCard({ recipient, onRecipientClick, onRecipientDelete }) {
 
   return (
     <li className="recipient">
-      <img src="" alt="" className="recipient__img" />
+      <img src="#" alt="" className="recipient__img" />
       <h2 className="recipient__name">{recipient.name}</h2>
       <p className="recipient__gifts-number">
         Gifts/{recipient.products.length}

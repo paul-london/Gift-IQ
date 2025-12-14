@@ -16,7 +16,11 @@ function App() {
   const [seacrhText, setSeacrhText] = useState("");
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
-  const [selectedRecipient, setselectedRecipient] = useState({});
+
+  const [formPriceRange, setFormPriceRange] = useState("50");
+  const [formSlectedCategories, setFormSlectedCategories] = useState([]);
+  const [formName, setFormName] = useState("");
+  const [formSelectedGroup, setFormSelectedGroup] = useState("");
 
   const [recipientsArray, setRecipientsArray] = useState();
   const loaclRecipientsString = localStorage.getItem("recipients");
@@ -31,24 +35,16 @@ function App() {
     }
   }, []);
 
-  let slectedCategories = [];
-  let selectedGroup = "";
-  let nameInput = "";
-  let priceRange = "5";
-
-  function handleRecipientClick(recipient) {
-    setselectedRecipient(recipient);
-  }
   function handleItemClick(item) {
     setActiveModal("preview");
     setSelectedItem(item);
   }
   function closeActiveModal() {
     if (activeModal === "gift_survey") {
-      slectedCategories = [];
-      selectedGroup = "";
-      nameInput = "";
-      priceRange = "5";
+      setFormSlectedCategories([]);
+      setFormSelectedGroup("");
+      setFormName("");
+      setFormPriceRange("50");
     }
     setActiveModal("");
   }
@@ -61,9 +57,7 @@ function App() {
   function handleSearch(text) {
     setSeacrhText(text);
   }
-  function handleCategory(text) {
-    setCategory(text);
-  }
+
   function handleAddToCart(item, quantity) {
     const id = selectedItemsToAdd.findIndex((curr) => curr._id === item._id);
     if (id >= 0) {
@@ -83,34 +77,35 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    // setHighPriceRange(priceRange);
-
+    const id =
+      recipientsArray === undefined || recipientsArray.length === 0
+        ? 0
+        : recipientsArray.length + 1;
     const newRecipient = {
-      _id: 0 + recipientsArray?.length + 1,
-      name: nameInput,
-      group: selectedGroup,
-      priceRange: priceRange,
-      categories: selectedCategory,
+      _id: id,
+      name: formName,
+      group: formSelectedGroup,
+      priceRange: formPriceRange,
+      categories: formSlectedCategories,
       products: [],
     };
 
     const loaclRecipientsArray = [...recipientsArray, newRecipient];
     setRecipientsArray(loaclRecipientsArray);
     localStorage.setItem("recipients", JSON.stringify(loaclRecipientsArray));
-
+    e.target.reset();
     setActiveModal("");
   }
 
   function setNameInput(e) {
-    nameInput = e.target.value;
+    setFormName(e.target.value);
   }
   function setSelectedGroup(e) {
-    selectedGroup = e.target.value;
+    setFormSelectedGroup(e.target.value);
   }
 
   function setPriceRange(e) {
-    priceRange = e.target.value;
+    setFormPriceRange(e.target.value);
   }
   function handleAddRecipient() {
     setActiveModal("gift_survey");
@@ -123,13 +118,18 @@ function App() {
     setRecipientsArray(newArray);
   }
   let isChecked;
-
+  const [countCategories, setCountCategories] = useState(0);
   function handleOnCheckBoxChange(e, category) {
-    debugger;
-    if (e.target.checked) {
-      slectedCategories.push(category);
+    if (countCategories < 3 && e.target.checked) {
+      setCountCategories(countCategories + 1);
+      setFormSlectedCategories([...formSlectedCategories, category]);
+    } else if (countCategories === 3 && !e.target.checked) {
+      const index = formSlectedCategories.indexOf(category);
+      formSlectedCategories.splice(index, 1);
+      setCountCategories(countCategories - 1);
     } else {
-      console.log(slectedCategories.indexOf(category));
+      e.target.checked = false;
+      alert("Please choose up to 3 categories.", "Smart Gift Planner");
     }
   }
   return (
@@ -139,7 +139,6 @@ function App() {
           handleLowPriceRange={handleLowPriceRange}
           handleHighPriceRange={handleHighPriceRange}
           handleSearch={handleSearch}
-          handleCategory={handleCategory}
           lowPriceRange={lowPriceRange}
           highPriceRange={highPriceRange}
           cartItems={selectedItemsToAdd}
@@ -153,7 +152,6 @@ function App() {
           highPriceRange={highPriceRange}
           seacrhTextValue={seacrhText}
           handleAddToCart={handleAddToCart}
-          handleRecipientClick={handleRecipientClick}
           handleAddRecipient={handleAddRecipient}
           handleDeleteRecipient={handleDeleteRecipient}
         />
@@ -166,62 +164,76 @@ function App() {
         onFormSubmit={handleSubmit}
       >
         <label htmlFor="name" className="form__label">
-          Name{" "}
           <input
             type="text"
             className="form__input"
             id="name"
-            defaultValue={nameInput}
+            defaultValue={formName}
             onChange={setNameInput}
             placeholder="Recipient name..."
           />
         </label>
-        <label htmlFor="name" className="form__label">
+        <label htmlFor="name" className="form__label form__label_type_group">
           Group{" "}
-          <select defaultValue={selectedGroup} onChange={setSelectedGroup}>
+        </label>
+        <div className="form__select-container">
+          <select
+            id="group-select"
+            defaultValue={formSelectedGroup}
+            onChange={setSelectedGroup}
+            className="form__select"
+          >
             {groupOptions.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option
+                className="form__option"
+                key={option.value}
+                value={option.value}
+              >
                 {option.label}
               </option>
             ))}
           </select>
-        </label>
+          <span className="form__span">&#9660;</span>
+        </div>
+
         <h2 className="form__title">
           {" "}
           What are their interests? (Choose up to 3){" "}
         </h2>
         <div className="form__checkbox-container">
           {catregoryOptions.map((option) => (
-            <label
-              key={option.value}
-              className="form__label form__label_type_checkbox"
-              htmlFor="checkbox-input"
-            >
+            <div className="form__checkbox-inside" key={option.value}>
               <input
                 className="form__input_type_checkbox"
                 id="checkbox-input"
                 type="checkbox"
-                key={option.value}
                 checked={isChecked}
                 onChange={(e) => {
                   handleOnCheckBoxChange(e, option.value);
                 }}
               />
-              {option.label}
-            </label>
+              <label
+                className="form__label form__label_type_checkbox"
+                htmlFor="checkbox-input"
+              >
+                {option.label}
+              </label>
+            </div>
           ))}
         </div>
-
-        <input
-          type="range"
-          id="low-range"
-          min="0"
-          max="1000"
-          step="1"
-          defaultValue={priceRange}
-          onChange={setPriceRange}
-          className="form__input-range"
-        />
+        <label htmlFor="name" className="form__label form__label_type_range">
+          <input
+            type="range"
+            id="price-range"
+            min="0"
+            max="1000"
+            step="1"
+            defaultValue={formPriceRange}
+            onChange={setPriceRange}
+            className="form__input-range"
+          />
+          <span className="form__span-range"> ${formPriceRange}</span>
+        </label>
       </FormModal>
       <ItemModal
         activeModal={activeModal}
