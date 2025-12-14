@@ -9,6 +9,7 @@
 
 .page__content {
   max-width: 1280px;
+  min-height: 750px;
   margin: 0 auto;
   padding: 0 40px;
 }

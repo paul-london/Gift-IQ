@@ -16,7 +16,11 @@ function App() {
   const [seacrhText, setSeacrhText] = useState("");
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
-  const [selectedRecipient, setselectedRecipient] = useState({});
+
+  const [formPriceRange, setFormPriceRange] = useState("50");
+  const [formSlectedCategories, setFormSlectedCategories] = useState([]);
+  const [formName, setFormName] = useState("");
+  const [formSelectedGroup, setFormSelectedGroup] = useState("");
 
   const [recipientsArray, setRecipientsArray] = useState();
   const loaclRecipientsString = localStorage.getItem("recipients");
@@ -31,24 +35,22 @@ function App() {
     }
   }, []);
 
-  let slectedCategories = [];
-  let selectedGroup = "";
-  let nameInput = "";
-  let priceRange = "5";
+  //let slectedCategories = [];
+  //let selectedGroup = "";
+  //let nameInput = "";
+  //let priceRange = "5";
 
-  function handleRecipientClick(recipient) {
-    setselectedRecipient(recipient);
-  }
   function handleItemClick(item) {
     setActiveModal("preview");
     setSelectedItem(item);
   }
   function closeActiveModal() {
     if (activeModal === "gift_survey") {
-      slectedCategories = [];
-      selectedGroup = "";
-      nameInput = "";
-      priceRange = "5";
+      setFormSlectedCategories([]);
+      setFormSelectedGroup("");
+      setFormName("");
+      setFormPriceRange("50");
+      //priceRange = "5";
     }
     setActiveModal("");
   }
@@ -61,9 +63,7 @@ function App() {
   function handleSearch(text) {
     setSeacrhText(text);
   }
-  function handleCategory(text) {
-    setCategory(text);
-  }
+
   function handleAddToCart(item, quantity) {
     const id = selectedItemsToAdd.findIndex((curr) => curr._id === item._id);
     if (id >= 0) {
@@ -84,18 +84,18 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // setHighPriceRange(priceRange);
-    // const categoriesSelected = slectedCategories.map(
-    //   (i) => slectedCategories[i]
-    // );
     debugger;
-    //console.log(categoriesSelected);
+
+    const id =
+      recipientsArray === undefined || recipientsArray.length === 0
+        ? 0
+        : recipientsArray.length + 1;
     const newRecipient = {
-      _id: 0 + recipientsArray?.length + 1,
-      name: nameInput,
-      group: selectedGroup,
-      priceRange: priceRange,
-      categories: slectedCategories,
+      _id: id,
+      name: formName,
+      group: formSelectedGroup,
+      priceRange: formPriceRange,
+      categories: formSlectedCategories,
       products: [],
     };
 
@@ -107,14 +107,14 @@ function App() {
   }
 
   function setNameInput(e) {
-    nameInput = e.target.value;
+    setFormName(e.target.value);
   }
   function setSelectedGroup(e) {
-    selectedGroup = e.target.value;
+    setFormSelectedGroup(e.target.value);
   }
 
   function setPriceRange(e) {
-    priceRange = e.target.value;
+    setFormPriceRange(e.target.value);
   }
   function handleAddRecipient() {
     setActiveModal("gift_survey");
@@ -132,10 +132,10 @@ function App() {
     if (countCategories < 3) {
       if (e.target.checked) {
         countCategories = countCategories + 1;
-        slectedCategories.push(category);
+        setFormSlectedCategories([...formSlectedCategories, category]);
       } else {
-        const index = slectedCategories.indexOf(category);
-        slectedCategories.splice(index, 1);
+        const index = formSlectedCategories.indexOf(category);
+        formSlectedCategories.splice(index, 1);
         countCategories = countCategories - 1;
       }
     } else {
@@ -150,7 +150,6 @@ function App() {
           handleLowPriceRange={handleLowPriceRange}
           handleHighPriceRange={handleHighPriceRange}
           handleSearch={handleSearch}
-          handleCategory={handleCategory}
           lowPriceRange={lowPriceRange}
           highPriceRange={highPriceRange}
           cartItems={selectedItemsToAdd}
@@ -164,7 +163,6 @@ function App() {
           highPriceRange={highPriceRange}
           seacrhTextValue={seacrhText}
           handleAddToCart={handleAddToCart}
-          handleRecipientClick={handleRecipientClick}
           handleAddRecipient={handleAddRecipient}
           handleDeleteRecipient={handleDeleteRecipient}
         />
@@ -182,20 +180,30 @@ function App() {
             type="text"
             className="form__input"
             id="name"
-            defaultValue={nameInput}
+            defaultValue={formName}
             onChange={setNameInput}
             placeholder="Recipient name..."
           />
         </label>
         <label htmlFor="name" className="form__label">
           Group{" "}
-          <select defaultValue={selectedGroup} onChange={setSelectedGroup}>
+          <select
+            id="group-select"
+            defaultValue={formSelectedGroup}
+            onChange={setSelectedGroup}
+            className="form__select"
+          >
             {groupOptions.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option
+                className="form__option"
+                key={option.value}
+                value={option.value}
+              >
                 {option.label}
               </option>
             ))}
           </select>
+          <span className="form__span">&#9660;</span>
         </label>
         <h2 className="form__title">
           {" "}
@@ -222,17 +230,19 @@ function App() {
             </label>
           ))}
         </div>
-
-        <input
-          type="range"
-          id="low-range"
-          min="0"
-          max="1000"
-          step="1"
-          defaultValue={priceRange}
-          onChange={setPriceRange}
-          className="form__input-range"
-        />
+        <label htmlFor="name" className="form__label form__label_type_range">
+          <input
+            type="range"
+            id="price-range"
+            min="0"
+            max="1000"
+            step="1"
+            defaultValue={formPriceRange}
+            onChange={setPriceRange}
+            className="form__input-range"
+          />
+          ${formPriceRange}
+        </label>
       </FormModal>
       <ItemModal
         activeModal={activeModal}

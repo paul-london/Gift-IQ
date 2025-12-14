@@ -1,5 +1,6 @@
 .recipients {
   margin-top: 20px;
+  min-height: 750px;
   position: relative;
   display: none;
 }

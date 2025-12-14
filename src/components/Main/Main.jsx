@@ -38,8 +38,10 @@ function Main({
     const filterRecipientG = testItems
       .filter((item) => {
         return (
-          item.price <= recipient.priceRange &&
-          item.broad_category.includes(recipient.categories[0])
+          (item.price <= recipient.priceRange &&
+            item.broad_category.includes(recipient.categories[0])) ||
+          item.broad_category.includes(recipient.categories[1]) ||
+          item.broad_category.includes(recipient.categories[2])
         );
       })
       .map((item) => {
