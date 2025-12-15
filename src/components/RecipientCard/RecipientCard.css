@@ -9,6 +9,7 @@
   border-radius: 18px;
   border: 1px solid #0000004d;
   padding: 10px;
+  background-color: #eff6ff;
 }
 
 .recipient__img {
@@ -24,7 +25,7 @@
   line-height: 36px;
   font-weight: 700;
   color: #00000099;
-  background-color: #ffffff;
+  background-color: transparent;
   padding: 2px 12px;
   border-radius: 9px;
 }
@@ -44,4 +45,10 @@
 .recipient__btn {
   cursor: pointer;
   border-radius: 8px;
+  background-color: #31b1c2;
+  border: none;
+}
+
+.recipient__gift {
+  background: url(../../assets/images/gift-icon.svg);
 }

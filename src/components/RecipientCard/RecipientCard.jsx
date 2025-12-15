@@ -13,6 +13,7 @@ function RecipientCard({ recipient, onRecipientClick, onRecipientDelete }) {
     <li className="recipient">
       <img src={avatar} alt="" className="recipient__img" />
       <h2 className="recipient__name">{recipient.name}</h2>
+      <div className="recipient__gift"></div>
       <p className="recipient__gifts-number">
         Gifts/{recipient.products.length}
       </p>
