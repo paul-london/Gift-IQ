@@ -1,0 +1,34 @@
+.user-card {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.user-card__avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid #d0dcf0;
+}
+
+.user-card__name {
+  font-size: 32px;
+  margin: 0;
+}
+
+.user-card__tag {
+  background: #e0e9f7;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.user-card__icons button {
+  font-size: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}

@@ -1,0 +1,62 @@
+.add-gift-container {
+  margin-top: 40px;
+  background: #f7f9fc;
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid #e0e6ed;
+  max-width: 800px;
+}
+
+.add-gift-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.add-gift-form {
+  display: grid;
+  grid-template-columns: 1fr 120px 1fr;
+  grid-template-areas:
+    "name  price  link"
+    "desc  desc   desc"
+    ".     .      btn";
+  gap: 16px;
+}
+
+.add-gift-input {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #cdd5df;
+  background: white;
+  font-size: 15px;
+}
+
+.add-gift-input::placeholder {
+  color: #9aa6b8;
+}
+
+/* Map each input to a grid area */
+.add-gift-name { grid-area: name; }
+.add-gift-price { grid-area: price; }
+.add-gift-link { grid-area: link; }
+.add-gift-desc {
+  grid-area: desc;
+  resize: none;
+  height: 80px;
+}
+
+/* Submit button */
+.add-gift-btn {
+  grid-area: btn;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #b9c9e6;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.add-gift-btn:hover {
+  background: #a7b8d4;
+}

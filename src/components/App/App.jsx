@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
@@ -10,8 +11,11 @@ import SignUpModal from "../SignUpModal/SignUpModal";
 import { catregoryOptions } from "../../utils/constants";
 import { groupOptions } from "../../utils/constants";
 import { signup, signin, getCurrentUser } from "../../utils/auth";
+import { testItems } from "../../utils/constants";
+
 import Footer from "../Footer/Footer";
 import SubNav from "../SubNav/SubNav";
+import ProfilePage from "../ProfilePage/ProfilePage";
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
@@ -22,10 +26,14 @@ function App() {
   const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const token = localStorage.getItem("jwt");
+  const token = localStorage.getItem("token");
   const [shouldResetLoginForm, setShouldResetLoginForm] = useState(false);
   const [shouldResetSignUpForm, setShouldResetSignUpForm] = useState(false);
   const [currentTab, setCurrentTab] = useState("home");
+  const [gifts, setGifts] = useState([]);
+  useEffect(() => {
+    setGifts(testItems);
+  }, []);
 
   const OpenGiftSurveyModal = () => {
     setActiveModal("gift_survey");
@@ -45,7 +53,7 @@ function App() {
   const [recipientsArray, setRecipientsArray] = useState([]);
   const loaclRecipientsString = localStorage.getItem("recipients");
   let loaclRecipients = JSON.parse(loaclRecipientsString);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("recipients")) || [];
     setRecipientsArray(stored);
@@ -131,9 +139,10 @@ function App() {
       .then(() => {
         setActiveModal("sign in");
         return signin({ email, password }).then((data) => {
-          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("token", data.token);
           setIsLoggedIn(true);
           setUser(data.user);
+          console.log(data.user);
           setActiveModal("");
         });
       })
@@ -144,14 +153,14 @@ function App() {
   const handleSignIn = ({ email, password }) => {
     signin({ email, password })
       .then((data) => {
-        localStorage.setItem("jwt", data.token);
+        localStorage.setItem("token", data.token);
         setIsLoggedIn(true);
         return getCurrentUser(data.token);
       })
       .then((userData) => {
         setUser(userData);
         setIsLoggedIn(true);
-        setActiveModal("");
+        navigate("/profile");
       })
       .catch((error) => {
         console.error("Login error", error.message);
@@ -166,7 +175,7 @@ function App() {
     setTimeout(() => setActiveModal("Log in"));
   };
   const handleLogout = () => {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("token");
     setIsLoggedIn(false);
     setUser(null);
     setShouldResetLoginForm(true);
@@ -175,7 +184,7 @@ function App() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("token");
 
     if (!token) return;
 
@@ -186,7 +195,7 @@ function App() {
       })
       .catch((err) => {
         console.error("Token check failed", err);
-        localStorage.removeItem("jwt");
+        localStorage.removeItem("token");
         setIsLoggedIn(false);
         setUser(null);
       });
@@ -244,6 +253,16 @@ function App() {
                 handleAddToCart={handleAddToCart}
                 handleAddRecipient={handleAddRecipient}
                 handleDeleteRecipient={handleDeleteRecipient}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProfilePage
+                user={user}
+                gifts={user?.gifts || []}
+                token={localStorage.getItem("token")}
               />
             }
           />

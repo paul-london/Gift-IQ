@@ -89,6 +89,17 @@ function Header({
               <div className="header__dropdown">
                 <span className="header__dropdown-name">{user?.name}</span>
                 <p className="header__dropdown-email">{user?.email}</p>
+
+                <button
+                  className="header__dropdown-btn"
+                  onClick={() => {
+                    setIsDropdownOpen(false);
+                    window.location.href = "/profile";
+                  }}
+                >
+                  My Profile
+                </button>
+
                 <button className="header__dropdown-logout" onClick={onLogout}>
                   Log out
                 </button>
