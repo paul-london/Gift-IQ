@@ -21,7 +21,7 @@ export default function GiftGrid({ gifts, onStatusChange, onDelete }) {
   // Called when user clicks "Yes" in the modal
   function handleConfirmDelete() {
     if (selectedIndex === null) return;
-    onDelete(selectedIndex);          // <-- calls ProfilePage delete handler
+    onDelete(selectedIndex); // <-- calls ProfilePage delete handler
     setShowConfirm(false);
     setSelectedIndex(null);
   }
@@ -50,8 +50,15 @@ export default function GiftGrid({ gifts, onStatusChange, onDelete }) {
       {/* Confirmation modal renders here, only when showConfirm = true */}
       <ConfirmationModal
         open={showConfirm}
-        onCancel={handleCancelDelete}
+        title="Delete Saved Item?"
+        message={
+          <>
+            This will <strong>permanently</strong> delete this saved item. It
+            cannot be undone.
+          </>
+        }
         onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
       />
     </>
   );

@@ -1,57 +1,85 @@
-/* Full-screen dark overlay */
+/* Dimmed background */
 .confirm-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.55);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 999;
 }
 
-/* White dialog box */
+/* White card */
 .confirm-box {
-  background: #ffffff;
-  padding: 26px 32px;
-  border-radius: 18px;
-  max-width: 360px;
-  width: 90%;
+  background: #fff;
+  width: 330px;
+  border-radius: 14px;
+  padding: 22px 20px;
   text-align: center;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
 }
 
-.confirm-title {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
+/* Red circular icon */
+.confirm-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 3px solid #c04728;
+  color: #c04728;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px auto;
   font-weight: 600;
 }
 
-.confirm-message {
-  margin: 0 0 22px;
-  font-size: 0.95rem;
+/* Title */
+.confirm-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #000;
 }
 
-/* Buttons */
+/* Message text */
+.confirm-message {
+  font-size: 14px;
+  color: #333;
+  margin: 0 10px 18px;
+  line-height: 1.4;
+}
+
+.confirm-message strong {
+  color: #c04728;
+}
+
+/* Buttons row */
 .confirm-actions {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.confirm-btn {
-  min-width: 70px;
-  padding: 8px 18px;
-  border-radius: 999px;
+/* "No" link-style button */
+.confirm-no {
   border: none;
+  background: transparent;
+  color: #2d77ff;
+  font-size: 15px;
   cursor: pointer;
-  font-size: 0.9rem;
 }
 
-.confirm-btn--no {
-  background: #f3f3f3;
-}
-
-.confirm-btn--yes {
-  background: #6ca8ff;
+/* Orange Yes button (rounded pill) */
+.confirm-yes {
+  background: #c04728;
   color: white;
+  border: none;
+  padding: 8px 22px;
+  border-radius: 20px;
+  font-size: 15px;
+  cursor: pointer;
 }

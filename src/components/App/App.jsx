@@ -31,6 +31,7 @@ function App() {
   const [shouldResetSignUpForm, setShouldResetSignUpForm] = useState(false);
   const [currentTab, setCurrentTab] = useState("home");
   const [gifts, setGifts] = useState([]);
+
   useEffect(() => {
     setGifts(testItems);
   }, []);
@@ -110,6 +111,17 @@ function App() {
     }
     localStorage.setItem("recipients", JSON.stringify(recipientsArray));
     setRecipientsArray(updatedRecipientsArray);
+  }
+  function handleTabChange(tab) {
+    setCurrentTab(tab);
+
+    if (tab === "home") {
+      navigate("/smart_gift_planner");
+    } else if (tab === "saved") {
+      navigate("/smart_gift_planner/profile?saved=true");
+    } else if (tab === "profile") {
+      navigate("/smart_gift_planner/profile");
+    }
   }
 
   function handleSubmit(e) {
@@ -258,7 +270,7 @@ function App() {
           user={user}
           onLogout={handleLogout}
         />
-        <SubNav active={currentTab} onChange={setCurrentTab} />
+        <SubNav active={currentTab} onChange={handleTabChange} />
         <Routes>
           {/* Default route → redirect */}
           <Route
@@ -285,13 +297,23 @@ function App() {
 
           {/* Profile page */}
           <Route
-            path="/profile"
+            path="/smart_gift_planner/profile"
             element={
               <ProfilePage
+                mode="profile"
+                currentTab={currentTab}
+                setCurrentTab={setCurrentTab}
                 user={user}
                 gifts={user?.gifts || []}
                 token={localStorage.getItem("token")}
               />
+            }
+          />
+
+          <Route
+            path="/smart_gift_planner/profile/saved"
+            element={
+              <ProfilePage mode="saved" token={localStorage.getItem("token")} />
             }
           />
         </Routes>
