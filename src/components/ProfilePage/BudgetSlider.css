@@ -1,0 +1,61 @@
+/* --- Wrapper --- */
+.budget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* --- Top Row (Label + Value) --- */
+.budget-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.budget h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0d2c2c;
+}
+
+.budget-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0d2c2c;
+}
+
+/* --- Slider Track --- */
+.budget-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 10px;
+  background: #d7e3f7;
+  outline: none;
+  cursor: pointer;
+}
+
+/* --- Slider Thumb (WebKit) --- */
+.budget-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  background: #2f67ff;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 4px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+/* --- Slider Thumb (Firefox) --- */
+.budget-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  background: #2f67ff;
+  border-radius: 50%;
+  border: 3px solid white;
+  cursor: pointer;
+}

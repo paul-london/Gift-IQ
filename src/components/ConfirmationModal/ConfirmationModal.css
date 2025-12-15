@@ -1,0 +1,57 @@
+/* Full-screen dark overlay */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* White dialog box */
+.confirm-box {
+  background: #ffffff;
+  padding: 26px 32px;
+  border-radius: 18px;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.confirm-title {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.confirm-message {
+  margin: 0 0 22px;
+  font-size: 0.95rem;
+}
+
+/* Buttons */
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.confirm-btn {
+  min-width: 70px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.confirm-btn--no {
+  background: #f3f3f3;
+}
+
+.confirm-btn--yes {
+  background: #6ca8ff;
+  color: white;
+}

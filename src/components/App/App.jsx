@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
 import Main from "../Main/Main";
@@ -249,6 +249,13 @@ function App() {
         />
         <SubNav active={currentTab} onChange={setCurrentTab} />
         <Routes>
+          {/* Default route → redirect */}
+          <Route
+            path="/"
+            element={<Navigate to="/smart_gift_planner" replace />}
+          />
+
+          {/* Main page */}
           <Route
             path="/smart_gift_planner"
             element={
@@ -264,6 +271,8 @@ function App() {
               />
             }
           />
+
+          {/* Profile page */}
           <Route
             path="/profile"
             element={
@@ -275,109 +284,110 @@ function App() {
             }
           />
         </Routes>
-      </div>
-      <FormModal
-        title="Who will you buy a gift for?"
-        buttonText="Save"
-        activeModal={activeModal === "gift_survey"}
-        onClose={closeActiveModal}
-        onFormSubmit={handleSubmit}
-      >
-        <label htmlFor="name" className="form__label">
-          <input
-            type="text"
-            className="form__input"
-            id="name"
-            defaultValue={formName}
-            onChange={setNameInput}
-            placeholder="Recipient name..."
-          />
-        </label>
-        <label htmlFor="name" className="form__label form__label_type_group">
-          Group{" "}
-        </label>
-        <div className="form__select-container">
-          <select
-            id="group-select"
-            defaultValue={formSelectedGroup}
-            onChange={setSelectedGroup}
-            className="form__select"
-          >
-            {groupOptions.map((option) => (
-              <option
-                className="form__option"
-                key={option.value}
-                value={option.value}
-              >
-                {option.label}
-              </option>
+
+        <FormModal
+          title="Who will you buy a gift for?"
+          buttonText="Save"
+          activeModal={activeModal === "gift_survey"}
+          onClose={closeActiveModal}
+          onFormSubmit={handleSubmit}
+        >
+          <label htmlFor="name" className="form__label">
+            <input
+              type="text"
+              className="form__input"
+              id="name"
+              defaultValue={formName}
+              onChange={setNameInput}
+              placeholder="Recipient name..."
+            />
+          </label>
+          <label htmlFor="name" className="form__label form__label_type_group">
+            Group{" "}
+          </label>
+          <div className="form__select-container">
+            <select
+              id="group-select"
+              defaultValue={formSelectedGroup}
+              onChange={setSelectedGroup}
+              className="form__select"
+            >
+              {groupOptions.map((option) => (
+                <option
+                  className="form__option"
+                  key={option.value}
+                  value={option.value}
+                >
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <span className="form__span">&#9660;</span>
+          </div>
+
+          <h2 className="form__title">
+            {" "}
+            What are their interests? (Choose up to 3){" "}
+          </h2>
+          <div className="form__checkbox-container">
+            {catregoryOptions.map((option) => (
+              <div className="form__checkbox-inside" key={option.id}>
+                <input
+                  className="form__input_type_checkbox"
+                  id={option.id}
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={(e) => {
+                    handleOnCheckBoxChange(e, option.value);
+                  }}
+                />
+                <label
+                  className="form__label form__label_type_checkbox"
+                  htmlFor="checkbox-input"
+                >
+                  {option.label}
+                </label>
+              </div>
             ))}
-          </select>
-          <span className="form__span">&#9660;</span>
-        </div>
+          </div>
+          <label htmlFor="name" className="form__label form__label_type_range">
+            <input
+              type="range"
+              id="price-range"
+              min="0"
+              max="1000"
+              step="1"
+              defaultValue={formPriceRange}
+              onChange={setPriceRange}
+              className="form__input-range"
+            />
+            <span className="form__span-range"> ${formPriceRange}</span>
+          </label>
+        </FormModal>
 
-        <h2 className="form__title">
-          {" "}
-          What are their interests? (Choose up to 3){" "}
-        </h2>
-        <div className="form__checkbox-container">
-          {catregoryOptions.map((option) => (
-            <div className="form__checkbox-inside" key={option.id}>
-              <input
-                className="form__input_type_checkbox"
-                id={option.id}
-                type="checkbox"
-                checked={isChecked}
-                onChange={(e) => {
-                  handleOnCheckBoxChange(e, option.value);
-                }}
-              />
-              <label
-                className="form__label form__label_type_checkbox"
-                htmlFor="checkbox-input"
-              >
-                {option.label}
-              </label>
-            </div>
-          ))}
-        </div>
-        <label htmlFor="name" className="form__label form__label_type_range">
-          <input
-            type="range"
-            id="price-range"
-            min="0"
-            max="1000"
-            step="1"
-            defaultValue={formPriceRange}
-            onChange={setPriceRange}
-            className="form__input-range"
-          />
-          <span className="form__span-range"> ${formPriceRange}</span>
-        </label>
-      </FormModal>
-
-      <ItemModal
-        activeModal={activeModal === "preview"}
-        item={selectedItem}
-        onClose={closeActiveModal}
-      />
-      <LoginModal
-        isOpen={activeModal === "Log in"}
-        onClose={closeActiveModal}
-        onSignIn={handleSignIn}
-        onSignUpModal={switchToSignUp}
-        shouldResetLoginForm={shouldResetLoginForm}
-        onResetComplete={() => setShouldResetLoginForm(false)}
-      />
-      <SignUpModal
-        isOpen={activeModal === "sign up"}
-        onClose={closeActiveModal}
-        onSignInModal={switchToSignIn}
-        onSignUp={handleSignUp}
-        shouldResetSignUpForm={shouldResetSignUpForm}
-        onResetComplete={() => setShouldResetSignUpForm(false)}
-      />
-      <Footer />
+        <ItemModal
+          activeModal={activeModal === "preview"}
+          item={selectedItem}
+          onClose={closeActiveModal}
+        />
+        <LoginModal
+          isOpen={activeModal === "Log in"}
+          onClose={closeActiveModal}
+          onSignIn={handleSignIn}
+          onSignUpModal={switchToSignUp}
+          shouldResetLoginForm={shouldResetLoginForm}
+          onResetComplete={() => setShouldResetLoginForm(false)}
+        />
+        <SignUpModal
+          isOpen={activeModal === "sign up"}
+          onClose={closeActiveModal}
+          onSignInModal={switchToSignIn}
+          onSignUp={handleSignUp}
+          shouldResetSignUpForm={shouldResetSignUpForm}
+          onResetComplete={() => setShouldResetSignUpForm(false)}
+        />
+        <Footer />
+      </div>
     </div>
   );
 }

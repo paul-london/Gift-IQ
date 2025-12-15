@@ -1,9 +1,8 @@
 import "./UserInfoCard.css";
 
 function UserInfoCard({ user }) {
-  if (!user) {
-    return null; 
-  }
+  if (!user) return null;
+
   return (
     <div className="user-card">
       <img src={user.avatar} alt="avatar" className="user-card__avatar" />
@@ -14,10 +13,10 @@ function UserInfoCard({ user }) {
         <span className="user-card__tag">{user.relationship}</span>
 
         <div className="user-card__icons">
-          <button>✏️</button>
-          <button>📤</button>
-          <button>🖨️</button>
-          <button>🗑️</button>
+          <button title="Edit">✏️</button>
+          <button title="Upload">📤</button>
+          <button title="Print">🖨️</button>
+          <button title="Delete">🗑️</button>
         </div>
       </div>
     </div>

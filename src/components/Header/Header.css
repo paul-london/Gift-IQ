@@ -186,7 +186,12 @@
   background-color: #e5e7eb;
   margin: 8px 0;
 }
-
+.header__dropdown-btn {
+  font-size: 13px;
+  color: #6b7280;
+  background-color: #fff;
+  border: none;
+}
 .header__dropdown-logout {
   width: 100%;
   background: none;

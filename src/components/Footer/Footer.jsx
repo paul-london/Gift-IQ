@@ -28,7 +28,7 @@ function Footer() {
         </nav>
       </div>
 
-      <div className="footer__bottom">
+      <div className="footer__copyright">
         <span>© 2025 GiftIQ. All rights reserved.</span>
       </div>
     </footer>

@@ -7,7 +7,10 @@ function BudgetSlider({ value = 1500, onChange }) {
 
   return (
     <div className="budget">
-      <h3>Current Budget</h3>
+      <div className="budget-top-row">
+        <h3>Current Budget</h3>
+        <span className="budget-value">${value}</span>
+      </div>
 
       <input
         type="range"
@@ -17,8 +20,6 @@ function BudgetSlider({ value = 1500, onChange }) {
         onChange={handleChange}
         className="budget-slider"
       />
-
-      <span className="budget-value">${value}</span>
     </div>
   );
 }

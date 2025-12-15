@@ -10,23 +10,16 @@ export const getProfile = (token) => {
   }).then(checkResponse);
 };
 
-export async function updateBudget(budget) {
-  const token = localStorage.getItem("token");
-
-  const res = await fetch("http://localhost:3002/profile/budget", {
+export const updateBudget = (budget) => {
+  return fetch(`${baseUrl}/profile/budget`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: "Bearer " + localStorage.getItem("token"),
     },
     body: JSON.stringify({ budget }),
-    credentials: "include",
-  });
-
-  if (!res.ok) throw new Error(res.status);
-
-  return res.json(); // returns the updated user object
-}
+  }).then(checkResponse);
+};
 
 export const addGift = (token, gift) => {
   return fetch(`${baseUrl}/gifts`, {
