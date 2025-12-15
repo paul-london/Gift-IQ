@@ -30,10 +30,14 @@
   justify-content: center;
 }
 .recipient__add-btn {
-  border-radius: 9px;
-  position: absolute;
-  right: 30px;
-  bottom: 50px;
+  border-radius: 25px;
+  position: fixed;
+  right: 50px;
+  bottom: 15px;
+  min-width: 193px;
+  background-color: #0197a6;
+  border: none;
+  padding: 16px;
 }
 
 .recipient-main {
