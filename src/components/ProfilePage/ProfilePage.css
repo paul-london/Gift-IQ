@@ -1,12 +1,3 @@
-/* -----------------------------------------------------------
-   PROFILE CONTAINER
------------------------------------------------------------ */
-.profile-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 30px 20px;
-  font-family: Inter, sans-serif;
-}
 
 /* -----------------------------------------------------------
    BACK LINK
@@ -22,49 +13,58 @@
   font-size: 1rem;
 }
 
+
 /* -----------------------------------------------------------
-   HEADER (UserInfoCard + Right Side)
+   PROFILE HEADER LAYOUT (LEFT: Avatar, RIGHT: Budget + Buttons)
 ----------------------------------------------------------- */
 .profile-header {
   display: flex;
+  gap: 140px;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap;
+  width: 100%;
   margin-bottom: 25px;
 }
 
-/* Right side container (budget + buttons) */
+/* ------- RIGHT SIDE CONTAINER ------- */
 .profile-right {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 16px;
-  min-width: 260px;
+  gap: 14px;
+  min-width: 320px;
 }
 
-/* -----------------------------------------------------------
-   BUDGET SECTION
------------------------------------------------------------ */
+/* ------- Budget block ------- */
 .budget-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  max-width: 320px;
-  margin-right: 308px;
+  margin-top: 20px;
 }
 
-.budget-label {
-  font-weight: 500;
+.budget-section label {
+  font-weight: 600;
   margin-bottom: 6px;
+  font-size: 1rem;
 }
 
-/* -----------------------------------------------------------
-   SAVE / CANCEL BUTTONS
------------------------------------------------------------ */
+/* Center the value under the slider */
+.budget-value {
+  margin-top: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0e3b3c;
+  text-align: center;
+}
+
+/* ------- Save / Cancel Buttons (Top Right) ------- */
 .profile-actions {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  flex-direction: column;
   gap: 18px;
+  margin-top: 50px;
+  width: 100%;
 }
 
 .save-btn {
@@ -76,7 +76,7 @@
   font-size: 1rem;
   font-weight: 500;
   color: #1d2d3c;
-  transition: 0.2s ease;
+  transition: 0.2s;
 }
 
 .save-btn:hover {
@@ -87,28 +87,12 @@
   background: none;
   border: none;
   color: #444;
-  font-size: 1rem;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 .cancel-btn:hover {
   text-decoration: underline;
-}
-
-/* -----------------------------------------------------------
-   GIFTS SECTION
------------------------------------------------------------ */
-.gift-title {
-  font-size: 1.4rem;
-  margin: 20px 0 12px;
-}
-
-/* If your GiftGrid root has className="gift-grid", this will align the cards */
-.gift-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
 }
 
 /* -----------------------------------------------------------
@@ -119,6 +103,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap:12px;
   }
 
   .profile-right {
@@ -127,9 +112,5 @@
 
   .profile-actions {
     justify-content: center;
-  }
-
-  .gift-title {
-    text-align: center;
   }
 }

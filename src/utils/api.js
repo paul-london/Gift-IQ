@@ -10,12 +10,12 @@ export const getProfile = (token) => {
   }).then(checkResponse);
 };
 
-export const updateBudget = (budget) => {
+export const updateBudget = (token, budget) => {
   return fetch(`${baseUrl}/profile/budget`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + localStorage.getItem("token"),
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ budget }),
   }).then(checkResponse);

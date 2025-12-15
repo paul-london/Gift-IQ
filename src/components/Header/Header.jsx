@@ -93,7 +93,7 @@ function Header({
                   className="header__dropdown-btn"
                   onClick={() => {
                     setIsDropdownOpen(false);
-                    navigate("/profile");
+                    navigate("/smart_gift_planner/profile");
                   }}
                 >
                   My Profile

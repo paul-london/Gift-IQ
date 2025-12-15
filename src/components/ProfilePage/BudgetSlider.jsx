@@ -1,3 +1,5 @@
+import "../ProfilePage/BudgetSlider.css";
+
 function BudgetSlider({ value = 1500, onChange }) {
   const handleChange = (e) => {
     if (onChange) {
@@ -14,11 +16,11 @@ function BudgetSlider({ value = 1500, onChange }) {
 
       <input
         type="range"
-        min="0"
-        max="500"
-        value={value}
-        onChange={handleChange}
         className="budget-slider"
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        min="0"
+        max="1000"
       />
     </div>
   );
