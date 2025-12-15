@@ -250,7 +250,7 @@ function App() {
         <SubNav active={currentTab} onChange={setCurrentTab} />
         <Routes>
           <Route
-            path="/"
+            path="/smart_gift_planner"
             element={
               <Main
                 recipients={recipientsArray}
@@ -265,7 +265,7 @@ function App() {
             }
           />
           <Route
-            path="/profile"
+            path="/smart_gift_planner/profile"
             element={
               <ProfilePage
                 user={user}
