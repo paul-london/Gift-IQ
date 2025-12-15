@@ -11,12 +11,17 @@ function RecipientCard({ recipient, onRecipientClick, onRecipientDelete }) {
 
   return (
     <li className="recipient">
+      <div>
+        <button className="recipient__edit-btn"></button>
+      </div>
       <img src={avatar} alt="" className="recipient__img" />
       <h2 className="recipient__name">{recipient.name}</h2>
-      <div className="recipient__gift"></div>
-      <p className="recipient__gifts-number">
-        Gifts/{recipient.products.length}
-      </p>
+      <div className="recipient__gift">
+        <button class="recipient__gift-icon"></button>
+        <p className="recipient__gifts-number">
+          Gifts/{recipient.products.length}
+        </p>
+      </div>
       <div className="recipient__content">
         <button onClick={handleRecipientClick} className="recipient__btn">
           Find Gifts

@@ -23,8 +23,8 @@ function App() {
   const [highPriceRange, setHighPriceRange] = useState(1000);
   const [seacrhText, setSeacrhText] = useState("");
   const [selectedItem, setSelectedItem] = useState({});
-  const [selectedItemsToAdd, setSelectedItemsToAdd] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [user, setUser] = useState(null);
   const token = localStorage.getItem("token");
   const [shouldResetLoginForm, setShouldResetLoginForm] = useState(false);
@@ -88,16 +88,29 @@ function App() {
     setSeacrhText(text);
   }
 
-  function handleAddToCart(item, quantity) {
-    const id = selectedItemsToAdd.findIndex((curr) => curr._id === item._id);
-    if (id >= 0) {
-      selectedItemsToAdd[id].quantity = quantity;
-      setSelectedItemsToAdd(selectedItemsToAdd);
+  function handleToggleSaved(checked, item, recipientInfo) {
+    const recipientsTemp = [...recipientsArray];
+    const productIndex = recipientInfo.products.findIndex(
+      (curr) => curr._id === item._id
+    );
+    let updatedRecipientsArray;
+    if (productIndex < 0 && checked) {
+      // recipientInfo.products = [...recipientInfo.products, item];
+      updatedRecipientsArray = recipientsTemp.map((rec) => {
+        if (rec._id == recipientInfo._id) {
+          item.isLiked = true;
+          rec.products = [...rec.products, item];
+        }
+      });
     } else {
-      item = { ...item, quantity };
-      const itemsToAdd = [...selectedItemsToAdd, item];
-      setSelectedItemsToAdd(itemsToAdd);
+      updatedRecipientsArray = recipientsTemp.map((rec) => {
+        if (rec._id == recipientInfo._id) {
+          rec.products.splice(productIndex, 1);
+        }
+      });
     }
+    localStorage.setItem("recipients", JSON.stringify(recipientsArray));
+    setRecipientsArray(updatedRecipientsArray);
   }
   function handleTabChange(tab) {
     setCurrentTab(tab);
@@ -222,7 +235,6 @@ function App() {
     setRecipientsArray(newArray);
   }
   let isChecked;
-
   function handleOnCheckBoxChange(e, category) {
     if (countCategories < 3 && e.target.checked) {
       const count = countCategories + 1;
@@ -252,7 +264,6 @@ function App() {
           handleSearch={handleSearch}
           lowPriceRange={lowPriceRange}
           highPriceRange={highPriceRange}
-          cartItems={selectedItemsToAdd}
           openSignInModal={openSignInModal}
           openSignUpModal={openSignUpModal}
           isLoggedIn={isLoggedIn}
@@ -277,7 +288,7 @@ function App() {
                 lowPriceRange={lowPriceRange}
                 highPriceRange={highPriceRange}
                 seacrhTextValue={seacrhText}
-                handleAddToCart={handleAddToCart}
+                handleToggleSaved={handleToggleSaved}
                 handleAddRecipient={handleAddRecipient}
                 handleDeleteRecipient={handleDeleteRecipient}
               />

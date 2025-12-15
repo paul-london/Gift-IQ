@@ -1,16 +1,11 @@
 import "./ItemCard.css";
-function ItemCard({ item, onItemClick, onAddItem }) {
+function ItemCard({ item, onItemClick, recipient, onLikeItem }) {
   const handleItemClick = () => {
     onItemClick(item);
   };
-  let quantity = 1;
-  function updateQuantity(e) {
-    if (e.target.value && e.target.value > 0) {
-      quantity = e.target.value;
-    }
-  }
-  function handleAddToCart() {
-    onAddItem(item, quantity);
+
+  function handleLikeItem(e) {
+    onLikeItem(e.target.checked, item, recipient);
   }
   return (
     <li className="item">
@@ -21,7 +16,14 @@ function ItemCard({ item, onItemClick, onAddItem }) {
           src={item.link}
           alt={`${item.name} image`}
         />
-        <button className="item__like-btn"></button>
+        <input
+          className="item__like-btn"
+          id={item._id}
+          //value={isLiked}
+          //checked={isLiked}
+          type="checkbox"
+          onChange={handleLikeItem}
+        />
       </div>
       <div className="item__content">
         <h2 className="item__name">{item.name}</h2>

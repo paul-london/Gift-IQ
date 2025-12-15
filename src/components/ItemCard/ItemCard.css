@@ -59,15 +59,25 @@
 
 .item__like-btn {
   background: url(../../assets/images/heart.svg) no-repeat transparent;
-  height: 25px;
-  width: 25px;
+  height: 27px;
+  width: 27px;
+  box-sizing: border-box;
   bottom: 10px;
-  right: 10px;
+  right: 12px;
   position: absolute;
   border: none;
+  appearance: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .item__like-btn:hover {
+  cursor: pointer;
+  background: url(../../assets/images/red-heart.svg) no-repeat;
+}
+
+.item__like-btn:checked {
   cursor: pointer;
   background: url(../../assets/images/red-heart.svg) no-repeat;
 }

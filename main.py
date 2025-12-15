@@ -27,12 +27,24 @@ df_products = None
 async def startup_event():
     """Load products and initialize models on startup"""
     global df_products
-    print("Loading products:")
+    print("Loading products...")
     
+    # Load full dataset
     df_products = pd.read_csv("amazon_products.csv")
     
+    # Filter to available products only
+    availability = pd.read_csv("amazon_availability_final.csv")
+    available_products = availability[availability['availability'] == 'available']
+    
+    df_products = df_products.merge(
+        available_products[['asin']], 
+        on='asin', 
+        how='inner')
+    
+    print(f"Filtered to {len(df_products):,} available products")
+    
     # Initialize recommendation models
-    print("Initializing AI models...")
+    print("Initializing AI models:")
     initialize_models(df_products, sample_size=50000)
     
     print("API ready.")
