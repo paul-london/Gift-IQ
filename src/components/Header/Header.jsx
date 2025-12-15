@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/images/logoFooter.png";
 import avatarPlaceholder from "../../assets/images/avatarPH.jpg";
@@ -18,7 +18,7 @@ function Header({
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-
+  const navigate = useNavigate();
   // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -93,7 +93,7 @@ function Header({
                   className="header__dropdown-btn"
                   onClick={() => {
                     setIsDropdownOpen(false);
-                    window.location.href = "/profile";
+                    navigate("/profile");
                   }}
                 >
                   My Profile

@@ -265,7 +265,7 @@ function App() {
             }
           />
           <Route
-            path="/smart_gift_planner/profile"
+            path="/profile"
             element={
               <ProfilePage
                 user={user}
