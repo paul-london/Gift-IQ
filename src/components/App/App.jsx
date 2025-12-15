@@ -41,6 +41,7 @@ function App() {
   const [formSlectedCategories, setFormSlectedCategories] = useState([]);
   const [formName, setFormName] = useState("");
   const [formSelectedGroup, setFormSelectedGroup] = useState("");
+  const [countCategories, setCountCategories] = useState(0);
 
   const [recipientsArray, setRecipientsArray] = useState([]);
   const loaclRecipientsString = localStorage.getItem("recipients");
@@ -57,12 +58,16 @@ function App() {
   }
   function closeActiveModal() {
     if (activeModal === "gift_survey") {
-      setFormSlectedCategories([]);
-      setFormSelectedGroup("");
-      setFormName("");
-      setFormPriceRange("50");
+      resetForm();
     }
     setActiveModal("");
+  }
+  function resetForm() {
+    setFormSlectedCategories([]);
+    setFormSelectedGroup("");
+    setFormName("");
+    setFormPriceRange("50");
+    setCountCategories(0);
   }
   function handleLowPriceRange(price) {
     setLowPriceRange(price);
@@ -85,14 +90,10 @@ function App() {
       setSelectedItemsToAdd(itemsToAdd);
     }
   }
-  function onViewCart() {
-    if (selectedItemsToAdd.length > 0) {
-      setActiveModal("view_cart");
-    }
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
+
     const id =
       recipientsArray === undefined || recipientsArray.length === 0
         ? 0
@@ -105,11 +106,11 @@ function App() {
       categories: formSlectedCategories,
       products: [],
     };
-
     const loaclRecipientsArray = [...recipientsArray, newRecipient];
     setRecipientsArray(loaclRecipientsArray);
     localStorage.setItem("recipients", JSON.stringify(loaclRecipientsArray));
     e.target.reset();
+    resetForm();
     setActiveModal("");
   }
 
@@ -200,15 +201,22 @@ function App() {
     setRecipientsArray(newArray);
   }
   let isChecked;
-  const [countCategories, setCountCategories] = useState(0);
+
   function handleOnCheckBoxChange(e, category) {
     if (countCategories < 3 && e.target.checked) {
-      setCountCategories(countCategories + 1);
+      const count = countCategories + 1;
+      setCountCategories(count);
       setFormSlectedCategories([...formSlectedCategories, category]);
-    } else if (countCategories === 3 && !e.target.checked) {
-      const index = formSlectedCategories.indexOf(category);
-      formSlectedCategories.splice(index, 1);
-      setCountCategories(countCategories - 1);
+    } else if (countCategories <= 3) {
+      if (!e.target.checked) {
+        const count = countCategories - 1;
+        const index = formSlectedCategories.indexOf(category);
+        formSlectedCategories.splice(index, 1);
+        setCountCategories(count);
+      } else {
+        e.target.checked = false;
+        alert("Please choose up to 3 categories.", "Smart Gift Planner");
+      }
     } else {
       e.target.checked = false;
       alert("Please choose up to 3 categories.", "Smart Gift Planner");

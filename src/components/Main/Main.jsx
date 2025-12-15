@@ -18,52 +18,31 @@ function Main({
   const [recipientInfo, setRecipientInfo] = useState({});
 
   const count = useRef(0);
+  const arrayLength = useRef(0);
+
   useEffect(() => {
     if (count.current < 3) {
       count.current++;
-      return;
+    } else {
+      if (recipients.length > arrayLength.current) {
+        handleRecipientClick(recipients[recipients.length - 1]);
+      }
     }
-    if (recipients?.length > 0) {
-      handleRecipientClick(recipients[recipients.length - 1]);
-    }
+
+    if (recipients !== undefined) arrayLength.current = recipients?.length;
   }, [recipients]);
 
   useEffect(() => {
-    if (
-      recipientInfo?.name?.length > 0 &&
-      //seacrhTextValue.length > 0 &&
-      filterRecipientGifts?.length > 0
-    ) {
+    if (recipientInfo?.name?.length > 0 && filterRecipientGifts?.length > 0) {
       handleRecipientClick(recipientInfo);
     }
   }, [seacrhTextValue]);
   function handleGoBack() {
     setFilterRecipientGifts([]);
   }
-  // if (seacrhTextValue)
+
   function handleRecipientClick(recipient) {
     setRecipientInfo(recipient);
-    //   const filterRecipientG = testItems
-    //     .filter((item) => {
-    //       return (
-    //         (item.price <= recipient.priceRange &&
-    //           item.broad_category.includes(recipient.categories[0])) ||
-    //         item.broad_category.includes(recipient.categories[1]) ||
-    //         item.broad_category.includes(recipient.categories[2])
-    //       );
-    //     })
-    //     .map((item) => {
-    //       return (
-    //         <ItemCard
-    //           key={item._id}
-    //           item={item}
-    //           onItemClick={handleItemClick}
-    //           onAddItem={handleAddToCart}
-    //         />
-    //       );
-    //     });
-    //   setFilterRecipientGifts(filterRecipientG);
-    // }
 
     let filteredItems = testItems.filter((item) => {
       return (
@@ -94,6 +73,9 @@ function Main({
       );
     });
     setFilterRecipientGifts(filterRecipientG);
+    if (filterRecipientG?.length === 0) {
+      alert("Products not found at this moment!");
+    }
   }
   let coworkers, family, friends, other;
 
