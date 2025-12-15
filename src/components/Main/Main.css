@@ -48,7 +48,6 @@
 .recipient__gift-list {
   list-style-type: none;
   padding: 0;
-  margin: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, 325px);
   gap: 20px;

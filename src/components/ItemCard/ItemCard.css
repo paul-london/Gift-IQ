@@ -24,9 +24,9 @@
 
 .item__name {
   margin: 0;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: unset;
   line-height: 20px;
-  font-weight: 700;
   color: #000;
   background-color: transparent;
   border-radius: 4px;
@@ -34,26 +34,25 @@
 
 .item__content {
   display: flex;
-  position: relative;
   justify-content: space-between;
   flex-direction: column;
   gap: 10px;
   align-items: flex-start;
   margin-top: 12px;
   margin-bottom: 12px;
-  left: -90px;
+  width: 90%;
 }
 .item__price {
   margin: 0;
-  font-weight: 500;
   font-size: 20px;
   line-height: 1.2;
   padding: 0;
+  font-weight: 600;
 }
 .item__description {
   margin: 0;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.2;
   padding: 0;
 }
