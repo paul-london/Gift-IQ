@@ -1,3 +1,6 @@
+.main {
+  position: relative;
+}
 .recipients {
   margin-top: 20px;
   min-height: 750px;
@@ -29,15 +32,17 @@
   gap: 35px;
   justify-content: center;
 }
+
 .recipient__add-btn {
   border-radius: 25px;
-  position: fixed;
+  position: absolute;
   right: 50px;
-  bottom: 15px;
+  bottom: 100px;
   min-width: 193px;
   background-color: #0197a6;
   border: none;
   padding: 16px;
+  font-weight: 700;
 }
 
 .recipient-main {
