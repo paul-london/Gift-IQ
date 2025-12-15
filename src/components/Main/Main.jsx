@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 function Main({
   recipients,
+
   handleItemClick,
   lowPriceRange,
   highPriceRange,
@@ -13,6 +14,7 @@ function Main({
   handleAddToCart,
   handleAddRecipient,
   handleDeleteRecipient,
+  handleToggleSaved,
 }) {
   const [filterRecipientGifts, setFilterRecipientGifts] = useState([]);
   const [recipientInfo, setRecipientInfo] = useState({});
@@ -25,7 +27,7 @@ function Main({
       count.current++;
     } else {
       if (recipients.length > arrayLength.current) {
-        handleRecipientClick(recipients[recipients.length - 1]);
+        handleRecipientClick(recipients[recipients.length - 1], true);
       }
     }
 
@@ -69,6 +71,8 @@ function Main({
           item={item}
           onItemClick={handleItemClick}
           onAddItem={handleAddToCart}
+          recipient={recipient}
+          onLikeItem={handleToggleSaved}
         />
       );
     });
@@ -79,66 +83,70 @@ function Main({
   }
   let coworkers, family, friends, other;
 
-  if (recipients?.length > 0) {
-    coworkers = recipients
-      .filter((r) => {
-        return r.group === "Co-workers";
-      })
-      .map((recipient) => {
-        return (
-          <RecipientCard
-            key={recipient._id}
-            recipient={recipient}
-            onRecipientClick={handleRecipientClick}
-            onRecipientDelete={handleDeleteRecipient}
-          />
-        );
-      });
+  if (recipients[0] === undefined) {
+  } else {
+    if (recipients?.length > 0) {
+      coworkers = recipients
+        .filter((r) => {
+          return r.group === "Co-workers";
+        })
+        .map((recipient) => {
+          return (
+            <RecipientCard
+              key={recipient._id}
+              recipient={recipient}
+              onRecipientClick={handleRecipientClick}
+              onRecipientDelete={handleDeleteRecipient}
+            />
+          );
+        });
 
-    family = recipients
-      .filter((r) => {
-        return r.group === "Family";
-      })
-      .map((recipient) => {
-        return (
-          <RecipientCard
-            key={recipient._id}
-            recipient={recipient}
-            onRecipientClick={handleRecipientClick}
-            onRecipientDelete={handleDeleteRecipient}
-          />
-        );
-      });
-    friends = recipients
-      .filter((r) => {
-        return r.group === "Friends";
-      })
-      .map((recipient) => {
-        return (
-          <RecipientCard
-            key={recipient._id}
-            recipient={recipient}
-            onRecipientClick={handleRecipientClick}
-            onRecipientDelete={handleDeleteRecipient}
-          />
-        );
-      });
+      family = recipients
+        .filter((r) => {
+          return r.group === "Family";
+        })
+        .map((recipient) => {
+          return (
+            <RecipientCard
+              key={recipient._id}
+              recipient={recipient}
+              onRecipientClick={handleRecipientClick}
+              onRecipientDelete={handleDeleteRecipient}
+            />
+          );
+        });
+      friends = recipients
+        .filter((r) => {
+          return r.group === "Friends";
+        })
+        .map((recipient) => {
+          return (
+            <RecipientCard
+              key={recipient._id}
+              recipient={recipient}
+              onRecipientClick={handleRecipientClick}
+              onRecipientDelete={handleDeleteRecipient}
+            />
+          );
+        });
 
-    other = recipients
-      .filter((r) => {
-        return r.group === "Other";
-      })
-      .map((recipient) => {
-        return (
-          <RecipientCard
-            key={recipient._id}
-            recipient={recipient}
-            onRecipientClick={handleRecipientClick}
-            onRecipientDelete={handleDeleteRecipient}
-          />
-        );
-      });
+      other = recipients
+        .filter((r) => {
+          return r.group === "Other";
+        })
+        .map((recipient) => {
+          return (
+            <RecipientCard
+              key={recipient._id}
+              recipient={recipient}
+              onRecipientClick={handleRecipientClick}
+              onRecipientDelete={handleDeleteRecipient}
+            />
+          );
+        });
+    }
   }
+
   return (
     <main className="main">
       <section
@@ -199,6 +207,7 @@ function Main({
       >
         <h2 className="recipient__title">{recipientInfo?.name} Gifts</h2>
         <ul className="recipient__gift-list">{filterRecipientGifts}</ul>
+
         <button onClick={handleGoBack} className="recipient__add-btn ">
           Back
         </button>
