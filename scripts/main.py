@@ -1,7 +1,17 @@
 from fastapi import FastAPI, Query
 from data_loader import stream_products
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Smart Gift Planner API")
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def health_check():
