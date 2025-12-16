@@ -1,7 +1,7 @@
 import "./UserInfoCard.css";
 import { baseUrl } from "../../../utils/constants";
 
-function UserInfoCard({ user, onEditProfile }) {
+function UserInfoCard({ user, onEditProfile, onChangeAvatar }) {
   if (!user) return null;
 
   const avatarSrc = user.avatar ? `${baseUrl}${user.avatar}` : null;
@@ -22,8 +22,9 @@ function UserInfoCard({ user, onEditProfile }) {
           <button title="Edit" onClick={onEditProfile}>
             ✏️
           </button>
-          <button title="Upload">📤</button>
-          <button title="Print">🖨️</button>
+          <button title="Upload" onClick={onChangeAvatar}>
+            📤
+          </button>
           <button title="Delete">🗑️</button>
         </div>
       </div>

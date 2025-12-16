@@ -1,7 +1,7 @@
 import "./RecipientCard.css";
 import avatar from "../../assets/images/avatarPH.jpg";
 
-function RecipientCard({ recipient, onRecipientClick, onRecipientDelete }) {
+function RecipientCard({ recipient, onRecipientClick, onRecipientDelete, onFindGift }) {
   const handleRecipientClick = () => {
     onRecipientClick(recipient);
   };
@@ -23,7 +23,7 @@ function RecipientCard({ recipient, onRecipientClick, onRecipientDelete }) {
         </p>
       </div>
       <div className="recipient__content">
-        <button onClick={handleRecipientClick} className="recipient__btn">
+        <button onClick={onFindGift} className="recipient__btn">
           Find Gifts
         </button>
         <button onClick={handleDeleteRecipient} className="recipient__btn">

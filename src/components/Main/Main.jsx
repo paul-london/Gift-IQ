@@ -3,6 +3,7 @@ import ItemCard from "../ItemCard/ItemCard";
 import { testItems } from "../../utils/constants";
 import RecipientCard from "../RecipientCard/RecipientCard";
 import { useEffect, useRef, useState } from "react";
+import ProductSearchModal from "../ProductSearch/ProductSearchModal/ProductSearchModal";
 
 function Main({
   recipients,
@@ -21,6 +22,15 @@ function Main({
 
   const count = useRef(0);
   const arrayLength = useRef(0);
+  const [showGiftFinder, setShowGiftFinder] = useState(false);
+
+  function openGiftFinder() {
+    setShowGiftFinder(true);
+  }
+
+  function closeGiftFinder() {
+    setShowGiftFinder(false);
+  }
 
   useEffect(() => {
     if (count.current < 3) {
@@ -95,6 +105,7 @@ function Main({
             <RecipientCard
               key={recipient._id}
               recipient={recipient}
+              onFindGift={openGiftFinder}
               onRecipientClick={handleRecipientClick}
               onRecipientDelete={handleDeleteRecipient}
             />
@@ -110,6 +121,7 @@ function Main({
             <RecipientCard
               key={recipient._id}
               recipient={recipient}
+              onFindGift={openGiftFinder}
               onRecipientClick={handleRecipientClick}
               onRecipientDelete={handleDeleteRecipient}
             />
@@ -124,6 +136,7 @@ function Main({
             <RecipientCard
               key={recipient._id}
               recipient={recipient}
+              onFindGift={openGiftFinder}
               onRecipientClick={handleRecipientClick}
               onRecipientDelete={handleDeleteRecipient}
             />
@@ -140,6 +153,7 @@ function Main({
               key={recipient._id}
               recipient={recipient}
               onRecipientClick={handleRecipientClick}
+              onFindGift={openGiftFinder}
               onRecipientDelete={handleDeleteRecipient}
             />
           );
@@ -212,6 +226,7 @@ function Main({
           Back
         </button>
       </section>
+      <ProductSearchModal open={showGiftFinder} onClose={closeGiftFinder} />
     </main>
   );
 }

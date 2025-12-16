@@ -1,27 +1,28 @@
 import "./EditProfileModal.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function EditProfileModal({
   open,
   onClose,
   onSave,
-  currentAvatar,
+  currentName = "",
+  currentRelationship = "",
 }) {
   if (!open) return null;
 
-  const [avatarFile, setAvatarFile] = useState(null);
-  const [preview, setPreview] = useState(currentAvatar || "");
-  function handleFile(e) {
-    const file = e.target.files[0];
-    if (!file) return;
+  const [name, setName] = useState(currentName);
+  const [relationship, setRelationship] = useState(currentRelationship);
 
-    setAvatarFile(file);
-
-    setPreview(URL.createObjectURL(file));
-  }
+  // Sync modal fields when reopening modal
+  useEffect(() => {
+    setName(currentName || "");
+    setRelationship(currentRelationship || "");
+  }, [currentName, currentRelationship, open]);
 
   function handleSubmit() {
-    onSave(avatarFile);
+    if (!onSave) return; // prevents crash
+    onSave({ name, relationship });
+    onClose(); // reset UI
   }
 
   return (
@@ -29,23 +30,25 @@ export default function EditProfileModal({
       <div className="modal-box edit-profile-modal">
         <h2 className="modal-title">Edit Profile</h2>
 
-        <div className="avatar-section">
-          {preview ? (
-            <img src={preview} className="avatar-preview" />
-          ) : currentAvatar ? (
-            <img src={currentAvatar} className="avatar-preview" />
-          ) : (
-            <div className="avatar-placeholder"></div>
-          )}
+        {/* NAME FIELD */}
+        <div className="input-group">
+          <label className="field-label">Name</label>
+          <input
+            className="input-field"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter name"
+          />
         </div>
 
-        <div className="file-upload-container">
-          <label className="file-label">Upload New Avatar</label>
+        {/* RELATIONSHIP FIELD */}
+        <div className="input-group">
+          <label className="field-label">Relationship</label>
           <input
-            type="file"
-            accept="image/*"
-            className="file-input"
-            onChange={handleFile}
+            className="input-field"
+            value={relationship}
+            onChange={(e) => setRelationship(e.target.value)}
+            placeholder="e.g. Friend, Mom, Partner"
           />
         </div>
 
@@ -53,6 +56,7 @@ export default function EditProfileModal({
           <button className="modal-btn cancel" onClick={onClose}>
             Cancel
           </button>
+
           <button className="modal-btn save" onClick={handleSubmit}>
             Save
           </button>
