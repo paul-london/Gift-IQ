@@ -6,6 +6,7 @@ import AddGiftForm from "./AddGiftForm/AddGiftForm";
 import ConfirmModal from "../ConfirmationModal/ConfirmationModal";
 import UnsavedChangesModal from "../UnsavedChangesModal/UnsavedChangesModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import UploadAvatarModal from "../UploadAvatarModal/UploadAvatarModal";
 import { useLocation } from "react-router-dom";
 import { baseUrl } from "../../utils/constants";
 
@@ -16,6 +17,7 @@ import {
   updateGiftStatus,
   deleteGift,
   uploadAvatar,
+  updateProfile,
 } from "../../utils/api";
 
 import { useEffect, useState } from "react";
@@ -31,6 +33,7 @@ export default function ProfilePage({ currentTab, token, setCurrentTab }) {
   const [showUnsavedModal, setShowUnsavedModal] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
   const [newGift, setNewGift] = useState({
     name: "",
     price: "",
@@ -191,10 +194,29 @@ export default function ProfilePage({ currentTab, token, setCurrentTab }) {
 
       setProfile((prev) => ({
         ...prev,
-        avatar: `${baseUrl}${updated.avatar}`,
+        avatar: updated.avatar,
       }));
     } catch (err) {
       console.error("Upload error:", err);
+    }
+  }
+  function openAvatarUploader() {
+    setShowAvatarModal(true);
+  }
+  async function handleSaveProfile(updatedFields) {
+    try {
+      const authToken = token || localStorage.getItem("token");
+
+      const updated = await updateProfile(authToken, updatedFields);
+
+      setProfile((prev) => ({
+        ...prev,
+        ...updated,
+      }));
+
+      setShowEditModal(false);
+    } catch (err) {
+      console.error("Profile update error:", err);
     }
   }
 
@@ -206,7 +228,11 @@ export default function ProfilePage({ currentTab, token, setCurrentTab }) {
 
       {!isSavedView && (
         <div className="profile-header">
-          <UserInfoCard user={profile} onEditProfile={handleEditProfile} />
+          <UserInfoCard
+            user={profile}
+            onEditProfile={handleEditProfile}
+            onChangeAvatar={openAvatarUploader}
+          />
           <BudgetSlider value={profile.budget} onChange={handleBudgetChange} />
           <div className="profile-right">
             <div className="profile-actions">
@@ -245,12 +271,25 @@ export default function ProfilePage({ currentTab, token, setCurrentTab }) {
         onConfirm={confirmLeavePage}
         onCancel={cancelLeavePage}
       />
-      <EditProfileModal
-        open={showEditModal}
-        onClose={closeEditModal}
-        onSave={saveProfileAvatar}
-        currentAvatar={profile.avatar}
-      />
+      {showEditModal && (
+        <EditProfileModal
+          open={showEditModal}
+          onClose={closeEditModal}
+          onSave={handleSaveProfile}
+          currentName={profile.name}
+          currentAvatar={profile.avatar}
+          currentRelationship={profile.relationship}
+        />
+      )}
+      {showAvatarModal && (
+        <UploadAvatarModal
+          open={showAvatarModal}
+          onClose={() => setShowAvatarModal(false)}
+          onUploaded={saveProfileAvatar}
+          token={token || localStorage.getItem("token")}
+          currentAvatar={profile?.avatar ? `${baseUrl}${profile.avatar}` : ""}
+        />
+      )}
     </div>
   );
 }

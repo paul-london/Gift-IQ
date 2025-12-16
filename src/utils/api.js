@@ -61,6 +61,32 @@ export async function uploadAvatar(token, file) {
     body: formData,
   });
 
-  if (!res.ok) throw new Error("Avatar upload failed");
-  return res.json();
+  let data = null;
+  try {
+    data = await res.json();
+  } catch (e) {
+    console.warn("Could not parse JSON from avatar upload response");
+  }
+
+  console.log("Avatar upload response:", res.status, data);
+
+  if (!res.ok) {
+    throw new Error(
+      data?.error || `Avatar upload failed (status ${res.status})`
+    );
+  }
+
+  return data;
+}
+
+export async function updateProfile(token, fields) {
+  const res = await fetch(`${baseUrl}/profile`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(fields),
+  }).then(checkResponse);
+  return res;
 }
