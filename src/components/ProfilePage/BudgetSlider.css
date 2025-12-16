@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 12px;
   width: 100%;
+  margin-top: 20px;
 }
 
 /* --- Top Row (Label + Value) --- */
@@ -46,7 +47,7 @@
   background: #2f67ff;
   border-radius: 50%;
   border: 3px solid white;
-  box-shadow: 0 0 4px rgba(0,0,0,0.25);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
 
@@ -58,4 +59,52 @@
   border-radius: 50%;
   border: 3px solid white;
   cursor: pointer;
+}
+
+/* -----------------------------------------------------------
+    RESPONSIVE BREAKPOINTS
+----------------------------------------------------------- */
+
+/* --- Tablet Layout (budget label/value stack when needed) --- */
+@media (max-width: 900px) {
+  .budget-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .budget h3 {
+    font-size: 1rem;
+  }
+
+  .budget-value {
+    font-size: 1.05rem;
+  }
+}
+
+/* --- Mobile Layout --- */
+@media (max-width: 600px) {
+  .budget {
+    margin-top: 15px;
+  }
+
+  .budget-slider {
+    height: 6px;
+  }
+
+  .budget-slider::-webkit-slider-thumb,
+  .budget-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+  }
+
+  .budget-top-row {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .budget h3,
+  .budget-value {
+    font-size: 0.95rem;
+  }
 }

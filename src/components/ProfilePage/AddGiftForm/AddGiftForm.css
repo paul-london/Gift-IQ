@@ -1,30 +1,47 @@
+/* Outer container spans full width of page */
 .add-gift-container {
+  width: 100%;
   margin-top: 40px;
   background: #f7f9fc;
   padding: 25px;
   border-radius: 14px;
   border: 1px solid #e0e6ed;
-  max-width: 800px;
+}
+.add-gift-container {
+  width: 100%;
+  box-sizing: border-box;
 }
 
+.add-gift-form {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: hidden; /* SAFE – prevents form grids from pushing horizontally */
+}
+
+/* Title */
 .add-gift-title {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 20px;
 }
 
+/* Form grid (desktop) */
 .add-gift-form {
   display: grid;
-  grid-template-columns: 1fr 120px 1fr;
+  grid-template-columns: 1fr 150px 1fr;
   grid-template-areas:
-    "name  price  link"
-    "desc  desc   desc"
-    ".     .      btn";
+    "name price link"
+    "desc desc desc"
+    "btn btn btn";
   gap: 16px;
+  width: 100%;
 }
 
+/* Inputs */
 .add-gift-input {
-  padding: 10px 14px;
+  width: 100%;
+  padding: 12px 14px;
   border-radius: 10px;
   border: 1px solid #cdd5df;
   background: white;
@@ -35,28 +52,73 @@
   color: #9aa6b8;
 }
 
-/* Map each input to a grid area */
-.add-gift-name { grid-area: name; }
-.add-gift-price { grid-area: price; }
-.add-gift-link { grid-area: link; }
+/* Grid areas */
+.add-gift-name {
+  grid-area: name;
+}
+.add-gift-price {
+  grid-area: price;
+}
+.add-gift-link {
+  grid-area: link;
+}
 .add-gift-desc {
   grid-area: desc;
   resize: none;
-  height: 80px;
+  height: 90px;
 }
 
-/* Submit button */
+/* Button */
 .add-gift-btn {
   grid-area: btn;
-  padding: 10px 20px;
+  justify-self: center;
+  width: 200px;
+  padding: 12px 20px;
   border-radius: 10px;
   background: #b9c9e6;
   border: none;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 500;
   transition: 0.2s;
 }
 
 .add-gift-btn:hover {
   background: #a7b8d4;
+}
+
+/* -----------------------------------------
+   RESPONSIVE — STACK EVERYTHING ON MOBILE
+------------------------------------------ */
+@media (max-width: 780px) {
+  .add-gift-form {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "name"
+      "price"
+      "link"
+      "desc"
+      "btn";
+  }
+
+  .add-gift-btn {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+@media (max-width: 650px) {
+  .add-gift-form {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "name"
+      "price"
+      "link"
+      "desc"
+      "btn";
+  }
+
+  .add-gift-btn {
+    width: 100%;
+    justify-self: stretch;
+  }
 }

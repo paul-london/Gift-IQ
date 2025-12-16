@@ -1,10 +1,11 @@
-// src/components/ProfilePage/ProfilePage.jsx
 import "./ProfilePage.css";
 import UserInfoCard from "./UserInfoCard/UserInfoCard";
 import BudgetSlider from "./BudgetSlider";
 import GiftGrid from "./GiftGrid";
 import AddGiftForm from "./AddGiftForm/AddGiftForm";
 import ConfirmModal from "../ConfirmationModal/ConfirmationModal";
+import UnsavedChangesModal from "../UnsavedChangesModal/UnsavedChangesModal";
+import { useLocation } from "react-router-dom";
 
 import {
   getProfile,
@@ -17,12 +18,15 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ProfilePage({ user, token }) {
+export default function ProfilePage({ currentTab, token, setCurrentTab }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isSavedView = params.get("saved") === "true";
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-const [giftToDelete, setGiftToDelete] = useState(null);
+  const [showUnsavedModal, setShowUnsavedModal] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const [newGift, setNewGift] = useState({
     name: "",
@@ -49,6 +53,7 @@ const [giftToDelete, setGiftToDelete] = useState(null);
 
         const data = await getProfile(authToken);
         setProfile(data);
+        setHasUnsavedChanges(false);
       } catch (err) {
         console.error("Profile load error:", err);
       } finally {
@@ -58,10 +63,19 @@ const [giftToDelete, setGiftToDelete] = useState(null);
     load();
   }, [token]);
 
+  useEffect(() => {
+    if (currentTab === "saved") {
+      navigate("/smart_gift_planner/profile");
+    }
+  }, []);
+
   // Update budget
   async function handleBudgetChange(value) {
+    setHasUnsavedChanges(true);
     try {
-      const updated = await updateBudget(value);
+      const authToken = token || localStorage.getItem("token");
+
+      const updated = await updateBudget(authToken, value);
       setProfile(updated);
     } catch (err) {
       console.error("Budget update error:", err);
@@ -69,13 +83,17 @@ const [giftToDelete, setGiftToDelete] = useState(null);
   }
 
   // Add new gift
-  async function handleAddGift(e) {
-    e.preventDefault();
-
+  async function handleAddGift(form) {
+    setHasUnsavedChanges(true);
     try {
-      const res = await addGift(newGift);
-      setProfile((prev) => ({ ...prev, gifts: res.data }));
-      setNewGift({ name: "", price: "", link: "", description: "" });
+      const authToken = token || localStorage.getItem("token");
+
+      const updated = await addGift(authToken, form);
+
+      setProfile((prev) => ({
+        ...prev,
+        gifts: updated, // backend returns full updated array
+      }));
     } catch (err) {
       console.error("Add gift error:", err);
     }
@@ -83,12 +101,15 @@ const [giftToDelete, setGiftToDelete] = useState(null);
 
   // Update gift status
   async function handleStatusChange(index, status) {
+    setHasUnsavedChanges(true);
     try {
-      const updatedGift = await updateGiftStatus(index, status);
+      const authToken = token || localStorage.getItem("token");
+
+      const updatedGift = await updateGiftStatus(authToken, index, status);
 
       setProfile((prev) => {
         const copy = [...prev.gifts];
-        copy[index] = updatedGift.data;
+        copy[index] = updatedGift;
         return { ...prev, gifts: copy };
       });
     } catch (err) {
@@ -104,8 +125,11 @@ const [giftToDelete, setGiftToDelete] = useState(null);
   // STEP 2: actually delete once user confirms
   async function confirmDeleteGift() {
     try {
-      const updated = await deleteGift(deleteModal.index);
-      setProfile((prev) => ({ ...prev, gifts: updated.data }));
+      const authToken = token || localStorage.getItem("token");
+
+      const updated = await deleteGift(authToken, deleteModal.index);
+
+      setProfile((prev) => ({ ...prev, gifts: updated }));
     } catch (err) {
       console.error("Delete gift error:", err);
     } finally {
@@ -118,68 +142,96 @@ const [giftToDelete, setGiftToDelete] = useState(null);
     setDeleteModal({ open: false, index: null });
   }
 
-  // cancel / go back (you can add a separate modal later if you want)
   function handleBackClick() {
+    if (isSavedView) {
+      navigate("/smart_gift_planner");
+      return;
+    }
+
+    if (hasUnsavedChanges) {
+      setShowUnsavedModal(true);
+    } else {
+      navigate("/smart_gift_planner");
+    }
+  }
+
+  function confirmLeavePage() {
+    setHasUnsavedChanges(false);
+    setCurrentTab("home");
     navigate("/smart_gift_planner");
+  }
+
+  function cancelLeavePage() {
+    setShowUnsavedModal(false);
   }
 
   if (loading) return <p>Loading profile...</p>;
   if (!profile) return <p>Could not load profile.</p>;
 
+  async function handleSaveChanges() {
+    try {
+      const authToken = token || localStorage.getItem("token");
+
+      if (!authToken) {
+        console.error("❌ No token found when saving");
+        return;
+      }
+
+      // Example: only save budget
+      const updated = await updateBudget(authToken, profile.budget);
+      setProfile(updated);
+      setHasUnsavedChanges(false);
+    } catch (err) {
+      console.error("Save error:", err);
+    }
+  }
+
   return (
     <div className="profile-container">
-      {/* Back Button */}
       <button className="back-btn" onClick={handleBackClick}>
         ← Back to Homepage
       </button>
 
-      {/* HEADER ROW: avatar/info (left) + budget (right) */}
-      <div className="profile-header">
-        {/* Left: avatar, name, relationship, icons */}
-        <UserInfoCard user={profile} />
-
-        {/* Right: budget + save/cancel */}
-        <div className="profile-right">
-          <div className="budget-section">
-            <label className="budget-label"></label>
-            <BudgetSlider
-              value={profile.budget}
-              onChange={handleBudgetChange}
-            />
-          </div>
-
-          <div className="profile-actions">
-            <button className="save-btn">Save Changes</button>
-            <button className="cancel-btn" onClick={handleBackClick}>
-              Cancel
-            </button>
+      {!isSavedView && (
+        <div className="profile-header">
+          <UserInfoCard user={profile} />
+          <BudgetSlider value={profile.budget} onChange={handleBudgetChange} />
+          <div className="profile-right">
+            <div className="profile-actions">
+              <button className="save-btn" onClick={handleSaveChanges}>
+                Save Changes
+              </button>
+              <button className="cancel-btn" onClick={handleBackClick}>
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-
-     
+      )}
       <h2 className="gift-title">Your Saved Gifts</h2>
-
       <GiftGrid
         gifts={profile.gifts}
         onStatusChange={handleStatusChange}
-        onDelete={askDeleteGift} 
+        onDelete={askDeleteGift}
       />
-
-     
-      <AddGiftForm
-        onAdd={handleAddGift}
-        newGift={newGift}
-        setNewGift={setNewGift}
-      />
-
-   
+      {!isSavedView && (
+        <AddGiftForm
+          onAdd={handleAddGift}
+          newGift={newGift}
+          setNewGift={setNewGift}
+        />
+      )}
       <ConfirmModal
         open={deleteModal.open}
         title="Delete this gift?"
         message="This gift will be removed from your saved list."
         onConfirm={confirmDeleteGift}
         onCancel={cancelDeleteGift}
+      />
+      <UnsavedChangesModal
+        open={showUnsavedModal}
+        onConfirm={confirmLeavePage}
+        onCancel={cancelLeavePage}
       />
     </div>
   );

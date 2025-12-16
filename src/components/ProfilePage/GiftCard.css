@@ -1,95 +1,135 @@
-/* Main card style */
-.gift-card {
-  position: relative;
-  background: #f4f5f7;
-  padding: 18px;
-  border-radius: 14px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+.giftcard {
+  width: 330px;
+  background: #c7c9ce; /* Figma grey */
+  border-radius: 22px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------------- HEADER ---------------- */
+
+.giftcard-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.giftcard-title {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 600;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.giftcard-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid black;
+  background: white;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------------- BODY ---------------- */
+
+.giftcard-body {
+  display: flex;
+  margin-top: 12px;
+  align-items: flex-start;
+}
+
+/* IMAGE */
+
+.giftcard-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  background: #fff;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+/* TEXT + CONTROLS */
+
+.giftcard-info {
   display: flex;
   flex-direction: column;
 }
 
-/* Delete button */
-.gift-card__delete {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  opacity: 0.7;
-}
-
-.gift-card__delete:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-/* Title + price */
-.gift-card__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.gift-card__title {
+.giftcard-price {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #192b38;
-}
-
-.gift-card__price {
-  margin: 0;
-  font-size: 1rem;
   font-weight: bold;
-  color: #0e3b3c;
+  font-size: 1rem;
 }
 
-/* Link */
-.gift-card__link {
-  font-size: 0.85rem;
-  color: #235dff;
-  text-decoration: none;
+.giftcard-status-label {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.giftcard-status {
   margin-top: 4px;
-}
-
-.gift-card__link:hover {
-  text-decoration: underline;
-}
-
-/* Description */
-.gift-card__description {
-  font-size: 0.85rem;
-  margin: 8px 0 12px;
-  color: #444;
-}
-
-/* Footer (status selector) */
-.gift-card__footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.gift-card__status-label {
-  font-size: 0.85rem;
-  color: #666;
-}
-
-.gift-card__select {
-  padding: 6px 10px;
-  border-radius: 12px;
-  border: 1px solid #c3c8d1;
-  font-size: 0.85rem;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  font-size: 0.9rem;
   background: white;
+}
+/* Base dropdown container */
+.styled-dropdown {
+  width: 160px;
+  background: #c7c9ce; /* gray bg like your figma */
+  padding: 10px 16px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  appearance: none;
   cursor: pointer;
+  position: relative;
+  outline: none;
 }
 
-/* Mobile layout */
-@media (max-width: 480px) {
-  .gift-card {
-    padding: 14px;
-  }
+/* Custom arrow */
+.styled-dropdown {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+/* OPEN State (flip arrow when active) */
+.styled-dropdown:focus {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 14l5-5 5 5z'/></svg>");
+}
+
+/* ----- Status Colors (matches your screenshot!) ----- */
+.styled-dropdown.Bought {
+  color: #2e6f2e; /* green */
+  font-weight: 700;
+}
+
+.styled-dropdown.Not\ Bought {
+  color: #b44b33; /* red */
+  font-weight: 700;
+}
+
+/* Dropdown list styling */
+.styled-dropdown option {
+  font-size: 16px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+/* Remove default select border focus */
+.styled-dropdown:focus-visible {
+  outline: none;
 }

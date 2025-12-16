@@ -1,51 +1,32 @@
-/* =====================
-   FOOTER BASE
-===================== */
-
 .footer {
   background-color: #0f2a2a;
   color: #ffffff;
   padding: 48px clamp(24px, 6vw, 80px);
+  margin-top: auto;
 }
-
-/* =====================
-   MAIN LAYOUT
-===================== */
 
 .footer__content {
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: 1400px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 48px;
 }
 
-/* =====================
-   LOGO
-===================== */
-
 .footer__logo img {
   width: 120px;
   height: auto;
 }
 
-/* =====================
-   CENTER TEXT
-===================== */
-
 .footer__text {
   max-width: 520px;
-  margin: 0 auto; /* ← centers it */
-  text-align: center; /* ← Figma-style */
+  margin: 0 auto;
+  text-align: center;
   font-size: 14px;
   line-height: 1.6;
   color: #e6f2f2;
 }
-
-/* =====================
-   NAV LINKS
-===================== */
 
 .footer__nav {
   display: flex;
@@ -65,20 +46,12 @@
   text-decoration: underline;
 }
 
-/* =====================
-   COPYRIGHT
-===================== */
-
 .footer__copyright {
-  max-width: 1280px;
-  margin: 32px auto 0;
+  max-width: 1400px;
+  margin: 0 auto;
   font-size: 13px;
   color: #c7dcdc;
 }
-
-/* =====================
-   RESPONSIVE
-===================== */
 
 @media (max-width: 900px) {
   .footer__content {

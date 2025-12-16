@@ -1,38 +1,40 @@
 import "./GiftCard.css";
+
 export default function GiftCard({ gift, index, onStatusChange, onDelete }) {
   return (
-    <div className="gift-card">
-      {/* Delete button (top right) */}
-      <button className="gift-card__delete" onClick={() => onDelete(index)}>
-        ✕
-      </button>
+    <div className="giftcard">
+      {/* HEADER ROW */}
+      <div className="giftcard-top">
+        <h4 className="giftcard-title">{gift.name}</h4>
 
-      <div className="gift-card__content">
-        <div className="gift-card__header">
-          <h4 className="gift-card__title">{gift.name}</h4>
-          <p className="gift-card__price">${gift.price}</p>
-        </div>
+        <button className="giftcard-close" onClick={() => onDelete(index)}>
+          ✕
+        </button>
+      </div>
 
-        {/* Optional link */}
-        {gift.link && (
-          <a href={gift.link} target="_blank" className="gift-card__link">
-            View Item →
-          </a>
-        )}
+      <div className="giftcard-body">
+        {/* IMAGE */}
+        <img
+          src={gift.link}
+          alt={gift.name}
+          className="giftcard-image"
+          onError={(e) => (e.target.style.display = "none")}
+        />
 
-        <p className="gift-card__description">{gift.description}</p>
+        {/* PRICE + STATUS */}
+        <div className="giftcard-info">
+          <p className="giftcard-price">${gift.price}</p>
 
-        <div className="gift-card__footer">
-          <label className="gift-card__status-label">Gift Status</label>
+          <label className="giftcard-status-label">Gift Status</label>
 
           <select
-            value={gift.status}
+            className={`gift-status styled-dropdown ${gift.status}`}
+            value={gift.status || "No Status"}
             onChange={(e) => onStatusChange(index, e.target.value)}
-            className="gift-card__select"
           >
-            <option value="none">Not chosen</option>
-            <option value="considering">Considering</option>
-            <option value="purchased">Purchased</option>
+            <option>Gift Status</option>
+            <option>Considering</option>
+            <option>Purchased</option>
           </select>
         </div>
       </div>

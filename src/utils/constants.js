@@ -54,6 +54,7 @@ export const testItems = [
     description: "Winter boot",
     broad_category: "Sports",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Boot.png?etag=0953a2ea59f1c6ebc832fabacdc9c70e",
+    isLiked: false,
   },
   {
     _id: 2,
@@ -62,6 +63,7 @@ export const testItems = [
     description: "Summer cap",
     broad_category: "Sports & Outdoors",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+    isLiked: false,
   },
   {
     _id: 3,
@@ -70,6 +72,7 @@ export const testItems = [
     description: "Winter Coat",
     broad_category: "Health",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
+    isLiked: false,
   },
   {
     _id: 4,
@@ -78,6 +81,7 @@ export const testItems = [
     description: "Summer dress",
     broad_category: "Beauty",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Dress.png?etag=1f9cd32a311ab139cab43494883720bf",
+    isLiked: false,
   },
   {
     _id: 5,
@@ -86,6 +90,7 @@ export const testItems = [
     description: "Winter Hoodie",
     broad_category: "Automotive",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
+    isLiked: false,
   },
   {
     _id: 6,
@@ -94,6 +99,7 @@ export const testItems = [
     description: "Winter Jacket",
     broad_category: "Automotive",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+    isLiked: false,
   },
   {
     _id: 7,
@@ -102,6 +108,7 @@ export const testItems = [
     description: "Winter Jeans",
     broad_category: "Electronics",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jeans.png?etag=58345e8bef1ce5f95ac882e71d309e6c",
+    isLiked: false,
   },
   {
     _id: 8,
@@ -110,6 +117,7 @@ export const testItems = [
     description: "Winter Loafers",
     broad_category: "Home Appliances",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
+    isLiked: false,
   },
   {
     _id: 9,
@@ -118,6 +126,7 @@ export const testItems = [
     description: "Summer Sandals",
     broad_category: "Party Supplies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sandals.png?etag=9bea85a77c0306586d2b71a33b626d41",
+    isLiked: false,
   },
   {
     _id: 10,
@@ -126,6 +135,7 @@ export const testItems = [
     description: "Winter Scarf",
     broad_category: "Smart Home",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Scarf.png?etag=74efbee93810c926b5507e862c6cb76c",
+    isLiked: false,
   },
   {
     _id: 11,
@@ -134,6 +144,7 @@ export const testItems = [
     description: "Summer shorts",
     broad_category: "Gift Cards",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Shorts.png?etag=d728c496643f610de8d8fea92dd915ba",
+    isLiked: false,
   },
   {
     _id: 12,
@@ -142,6 +153,7 @@ export const testItems = [
     description: "Summer skirt",
     broad_category: "Pet Supplies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Skirt.png?etag=27a6bea7e1b63218820d615876fa31d1",
+    isLiked: false,
   },
   {
     _id: 13,
@@ -150,6 +162,7 @@ export const testItems = [
     description: "Home",
     broad_category: "Home & Kitchen",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+    isLiked: false,
   },
   {
     _id: 14,
@@ -158,6 +171,7 @@ export const testItems = [
     description: "Summer Sunglasses",
     broad_category: "Industrial",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sunglasses.png?etag=a1bced9e331d36cb278c45df51150432",
+    isLiked: false,
   },
   {
     _id: 15,
@@ -166,6 +180,7 @@ export const testItems = [
     description: "Summer Sweatshirt",
     broad_category: "Baby",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sweatshirt.png?etag=008a9674757bea2e0bdb31242e364be0",
+    isLiked: false,
   },
   {
     _id: 16,
@@ -174,6 +189,7 @@ export const testItems = [
     description: "Summer T-shirt",
     broad_category: "Travel",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09",
+    isLiked: false,
   },
 ];
 
