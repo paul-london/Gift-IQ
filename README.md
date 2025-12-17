@@ -17,6 +17,10 @@ GiftIQ enables users to:
 
 This repository contains the source code and documentation for the GiftIQ project.
 
+## Presentation (December 16, 2025)
+
+![Link](https://docs.google.com/presentation/d/10qfz_AFz7Mg0pLKxL2dMAnQUwWcbFwWvg33QpSXZ1uo/edit?pli=1&slide=id.p#slide=id.p)
+
 ## Features
 
 - **User-friendly interface** for adding and editing gift entries
