@@ -63,7 +63,8 @@ This repository contains the full source code and documentation for the **GiftIQ
 ## 📊 Project Presentation
 
 * **Presentation (December 16, 2025):**
-  [https://docs.google.com/presentation/d/10qfz_AFz7Mg0pLKxL2dMAnQUwWcbFwWvg33QpSXZ1uo/edit?slide=id.p#slide=id.p](https://docs.google.com/presentation/d/10qfz_AFz7Mg0pLKxL2dMAnQUwWcbFwWvg33QpSXZ1uo/edit?slide=id.p#slide=id.p)
+  [Slides](https://docs.google.com/presentation/d/10qfz_AFz7Mg0pLKxL2dMAnQUwWcbFwWvg33QpSXZ1uo/edit?slide=id.p#slide=id.p)
+  [YouTube Video](https://www.youtube.com/watch?v=jdn50yJOK8M)
 
 ---
 
