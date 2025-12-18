@@ -69,7 +69,7 @@ This repository contains the full source code and documentation for the **GiftIQ
 📈 Example Visualization
 
 Below is an example visualization used in the GiftIQ Data Science notebook to illustrate how gift data can be summarized as a word cloud.
-![](viz_wordcloud.png)
+![](plots/viz_wordcloud.png)
 
 ---
 
