@@ -55,7 +55,8 @@ This repository contains the full source code and documentation for the **GiftIQ
 
 ## 🎨 Design
 
-* **Figma Design:** [https://www.figma.com/design/nBx17mdejGAPUZak3O1AeK/Gift-Shop-List-App?node-id=251-442&t=wqDovBGyY6RX5YSy-0](https://www.figma.com/design/nBx17mdejGAPUZak3O1AeK/Gift-Shop-List-App?node-id=251-442&t=wqDovBGyY6RX5YSy-0)
+* **Figma Design:**
+  [https://www.figma.com/design/nBx17mdejGAPUZak3O1AeK/Gift-Shop-List-App?node-id=251-442&t=wqDovBGyY6RX5YSy-0](https://www.figma.com/design/nBx17mdejGAPUZak3O1AeK/Gift-Shop-List-App?node-id=251-442&t=wqDovBGyY6RX5YSy-0)
 
 ---
 
