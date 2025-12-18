@@ -66,9 +66,10 @@ This repository contains the full source code and documentation for the **GiftIQ
 
 ---
 
-📈 Example Visualization
+## 📈 Example Visualization
 
 Below is an example visualization used in the GiftIQ Data Science notebook to illustrate how gift data can be summarized as a word cloud.
+
 ![](plots/viz_wordcloud.png)
 
 ---
@@ -95,14 +96,14 @@ npm run dev
 * Smart gift recommendations using NLP-based similarity scoring
 * Reminder notifications for upcoming events
 * Enhanced analytics and budget insights
-* User profiles and sharing capabilities
+* User profiles and gift list sharing capabilities
 
 ---
 
 ## 🤝 Team Members
 
-- Data Scientists:
-- Software Engineers:
-- UI/UX Design:
+- Data Scientists: [Paul London](https://www.linkedin.com/in/palondon) | Viktor Kliufinskyi | Tiffany Kilari
+- Software Engineers: Colton Henderson | Iyad Shobaki | Gisell Tavarez
+- UI/UX Design: Caitlin Forcier | Salome Uili
 
 ---
