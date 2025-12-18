@@ -80,7 +80,7 @@ Follow these steps to run the project locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/iyadshobaki/smart_gift_planner.git
+git clone https://www.github.com/paul-london/Gift-IQ.git
 
 # Install dependencies
 npm install
